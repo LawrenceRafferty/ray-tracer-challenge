@@ -22,4 +22,13 @@ bool four_tuple::operator!=(const four_tuple & other) const
 {
 	return !(*this == other);
 }
+
+four_tuple four_tuple::operator+(const four_tuple & other) const
+{
+	return four_tuple(
+		_x + other._x,
+		_y + other._y,
+		_z + other._z,
+		_w + other._w);
+}
 } // namespace data_structures

@@ -26,3 +26,18 @@ TEST_CASE("points and vectors are not equal")
 	auto v = data_structures::four_tuple::vector(1.1, 2.2, 3.3);
 	REQUIRE(p != v);
 }
+
+TEST_CASE("adding a vector to a point is a new point")
+{
+	auto a1 = data_structures::four_tuple::point(3, -2, 5);
+	auto a2 = data_structures::four_tuple::vector(-2, 3, 1);
+	auto expected = data_structures::four_tuple::point(1, 1, 6);
+	REQUIRE(expected == (a1 + a2));
+}
+
+TEST_CASE("adding a vector to a vector is a new vector")
+{
+	auto v = data_structures::four_tuple::vector(1.1, 2.2, 3.3);
+	auto expected = data_structures::four_tuple::vector(2.2, 4.4, 6.6);
+	REQUIRE(expected == (v + v));
+}
