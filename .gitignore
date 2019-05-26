@@ -1,0 +1,4 @@
+/.vscode/ipch/
+*.plist
+/cpp/tests/data_structures/four_tuple
+/cpp/tests/data_structures/four_tuple.dSYM/
