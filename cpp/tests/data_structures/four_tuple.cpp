@@ -75,3 +75,18 @@ TEST_CASE("subtracting a vector from a vector is a vector")
 	auto expected = vector(-2, -4, -6);
 	REQUIRE(expected == (v1 - v2));
 }
+
+TEST_CASE("subtracting a vector from the zero vector")
+{
+	auto zero = vector(0, 0, 0);
+	auto v = vector(1, -2, 3);
+	auto expected = vector(-1, 2, -3);
+	REQUIRE(expected == (zero - v));
+}
+
+TEST_CASE("negating a vector")
+{
+	auto v = vector(1, -2, 3);
+	auto expected = vector(-1, 2, -3);
+	REQUIRE(expected == -v);
+}

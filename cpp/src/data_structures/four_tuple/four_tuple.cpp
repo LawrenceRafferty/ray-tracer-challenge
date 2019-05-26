@@ -40,4 +40,13 @@ four_tuple four_tuple::operator-(const four_tuple & other) const
 		_z - other._z,
 		_w - other._w);
 }
+
+four_tuple four_tuple::operator-() const
+{
+	return four_tuple(
+		-_x,
+		-_y,
+		-_z,
+		-_w);
+}
 } // namespace data_structures
