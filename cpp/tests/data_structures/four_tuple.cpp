@@ -163,3 +163,10 @@ TEST_CASE("the magnitude of a normalized vector is 1")
 	auto normalized = v.getNormalized();
 	REQUIRE(true == data_structures::float_utility::are_equivalent(1.0f, normalized.getMagnitude()));
 }
+
+TEST_CASE("the dot product of two vectors")
+{
+	auto a = vector(1, 2, 3);
+	auto b = vector(2, 3, 4);
+	REQUIRE(20 == a.dot(b));
+}

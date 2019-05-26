@@ -3,6 +3,14 @@
 
 namespace data_structures
 {
+float four_tuple::dot(const four_tuple & other) const
+{
+	return _x * other._x +
+		_y * other._y +
+		_z * other._z +
+		_w * other._w;
+}
+
 bool four_tuple::operator==(const four_tuple & other) const
 {
 	return float_utility::are_equivalent(_x, other._x) &&

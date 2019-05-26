@@ -21,6 +21,9 @@ public:
 	float getMagnitude() const;
 	four_tuple getNormalized() const;
 
+
+	float dot(const four_tuple & other) const;
+
 	bool operator==(const four_tuple & other) const;
 	bool operator!=(const four_tuple & other) const;
 
