@@ -22,6 +22,7 @@ public:
 	bool operator!=(const four_tuple & other) const;
 
 	four_tuple operator+(const four_tuple & other) const;
+	four_tuple operator-(const four_tuple & other) const;
 
 private:
 	four_tuple(float x, float y, float z, int w)

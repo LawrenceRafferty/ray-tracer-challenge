@@ -51,3 +51,27 @@ TEST_CASE("adding a vector to a vector is a new vector")
 	auto expected = vector(2.2, 4.4, 6.6);
 	REQUIRE(expected == (v + v));
 }
+
+TEST_CASE("subtracting two points is a vector")
+{
+	auto p1 = point(3, 2, 1);
+	auto p2 = point(5, 6, 7);
+	auto expected = vector(-2, -4, -6);
+	REQUIRE(expected == (p1 - p2));
+}
+
+TEST_CASE("subtracting a vector from a point is a point")
+{
+	auto p = point(3, 2, 1);
+	auto v = vector(5, 6, 7);
+	auto expected = point(-2, -4, -6);
+	REQUIRE(expected == (p - v));
+}
+
+TEST_CASE("subtracting a vector from a vector is a vector")
+{
+	auto v1 = vector(3, 2, 1);
+	auto v2 = vector(5, 6, 7);
+	auto expected = vector(-2, -4, -6);
+	REQUIRE(expected == (v1 - v2));
+}
