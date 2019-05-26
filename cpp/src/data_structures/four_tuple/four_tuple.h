@@ -19,6 +19,7 @@ public:
 	int getW() { return _w; }
 
 	float getMagnitude() const;
+	four_tuple getNormalized() const;
 
 	bool operator==(const four_tuple & other) const;
 	bool operator!=(const four_tuple & other) const;
