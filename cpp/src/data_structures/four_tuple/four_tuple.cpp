@@ -49,4 +49,22 @@ four_tuple four_tuple::operator-() const
 		-_z,
 		-_w);
 }
+
+four_tuple four_tuple::operator*(float scalar) const
+{
+	return four_tuple(
+		_x * scalar,
+		_y * scalar,
+		_z * scalar,
+		_w * scalar);
+}
+
+four_tuple four_tuple::operator/(float scalar) const
+{
+	return four_tuple(
+		_x / scalar,
+		_y / scalar,
+		_z / scalar,
+		_w / scalar);
+}
 } // namespace data_structures

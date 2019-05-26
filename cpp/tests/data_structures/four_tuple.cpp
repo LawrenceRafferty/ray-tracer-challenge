@@ -90,3 +90,24 @@ TEST_CASE("negating a vector")
 	auto expected = vector(-1, 2, -3);
 	REQUIRE(expected == -v);
 }
+
+TEST_CASE("multiplying a vector by a scalar")
+{
+	auto v = vector(1, -2, 3);
+	auto expected = vector(3.5, -7, 10.5);
+	REQUIRE(expected == (v * 3.5f));
+}
+
+TEST_CASE("multiplying a vector by a fraction")
+{
+	auto v = vector(1, -2, 3);
+	auto expected = vector(0.5, -1, 1.5);
+	REQUIRE(expected == (v * 0.5f));
+}
+
+TEST_CASE("dividing a vector by a scalar")
+{
+	auto v = vector(1, -2, 3);
+	auto expected = vector(0.5, -1, 1.5);
+	REQUIRE(expected == (v / 2));
+}

@@ -26,6 +26,9 @@ public:
 
 	four_tuple operator-() const;
 
+	four_tuple operator*(float scalar) const;
+	four_tuple operator/(float scalar) const;
+
 private:
 	four_tuple(float x, float y, float z, int w)
 		: _x{x}
