@@ -111,3 +111,33 @@ TEST_CASE("dividing a vector by a scalar")
 	auto expected = vector(0.5, -1, 1.5);
 	REQUIRE(expected == (v / 2));
 }
+
+void RequireMagnitude(float expectedMagnitude, const data_structures::four_tuple & v)
+{
+	REQUIRE(expectedMagnitude == v.getMagnitude());
+}
+
+TEST_CASE("computing the magnitude of vector(1, 0, 0)")
+{
+	RequireMagnitude(1, vector(1, 0, 0));
+}
+
+TEST_CASE("computing the magnitude of vector(0, 1, 0)")
+{
+	RequireMagnitude(1, vector(0, 1, 0));
+}
+
+TEST_CASE("computing the magnitude of vector(0, 0, 1)")
+{
+	RequireMagnitude(1, vector(0, 0, 1));
+}
+
+TEST_CASE("computing the magnitude of vector(1, 2, 3)")
+{
+	RequireMagnitude(sqrt(14), vector(1, 2, 3));
+}
+
+TEST_CASE("computing the magnitude of vector(-1, -2, -3)")
+{
+	RequireMagnitude(sqrt(14), vector(-1, -2, -3));
+}

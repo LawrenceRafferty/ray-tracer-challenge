@@ -67,4 +67,9 @@ four_tuple four_tuple::operator/(float scalar) const
 		_z / scalar,
 		_w / scalar);
 }
+
+float four_tuple::getMagnitude() const
+{
+	return sqrt(pow(_x, 2) + pow(_y, 2) + pow(_z, 2) + pow(_w, 2));
+}
 } // namespace data_structures

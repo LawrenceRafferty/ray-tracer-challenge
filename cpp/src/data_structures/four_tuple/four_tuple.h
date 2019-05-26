@@ -18,6 +18,8 @@ public:
 	float getZ() { return _z; }
 	int getW() { return _w; }
 
+	float getMagnitude() const;
+
 	bool operator==(const four_tuple & other) const;
 	bool operator!=(const four_tuple & other) const;
 
