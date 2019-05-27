@@ -11,6 +11,15 @@ float four_tuple::dot(const four_tuple & other) const
 		_w * other._w;
 }
 
+four_tuple four_tuple::cross(const four_tuple & other) const
+{
+	// ASSUME: operating on vectors (w == 0)
+	return vector(
+		_y * other._z - _z * other._y,
+		_z * other._x - _x * other._z,
+		_x * other._y - _y * other._x);
+}
+
 bool four_tuple::operator==(const four_tuple & other) const
 {
 	return float_utility::are_equivalent(_x, other._x) &&

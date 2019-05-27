@@ -170,3 +170,12 @@ TEST_CASE("the dot product of two vectors")
 	auto b = vector(2, 3, 4);
 	REQUIRE(20 == a.dot(b));
 }
+
+TEST_CASE("the cross product of two vectors")
+{
+	auto a = vector(1, 2, 3);
+	auto b = vector(2, 3, 4);
+	auto expected = vector(-1, 2, -1);
+	REQUIRE(expected == a.cross(b));
+	REQUIRE(-expected == b.cross(a));
+}
