@@ -1,5 +1,7 @@
 /.vscode/ipch/
 *.plist
+/cpp/tests/data_structures/color
+/cpp/tests/data_structures/color.dSYM/
 /cpp/tests/data_structures/four_tuple
 /cpp/tests/data_structures/four_tuple.dSYM/
 /cpp/src/exercises/projectiles/program
