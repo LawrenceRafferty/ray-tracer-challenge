@@ -22,4 +22,12 @@ namespace data_structures
 			_green + other._green,
 			_blue + other._blue);
 	}
+
+	color color::operator-(const color & other) const
+	{
+		return color(
+			_red - other._red,
+			_green - other._green,
+			_blue - other._blue);
+	}
 }

@@ -32,3 +32,11 @@ TEST_CASE("adding colors")
 	auto expected = color(1.6, 0.7, 1.0);
 	REQUIRE(expected == c1 + c2);
 }
+
+TEST_CASE("subtracting colors")
+{
+	auto c1 = color(0.9, 0.6, 0.75);
+	auto c2 = color(0.7, 0.1, 0.25);
+	auto expected = color(0.2, 0.5, 0.5);
+	REQUIRE(expected == c1 - c2);
+}

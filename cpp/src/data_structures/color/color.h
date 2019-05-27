@@ -16,6 +16,7 @@ public:
 	bool operator!=(const color & other) const;
 
 	color operator+(const color & other) const;
+	color operator-(const color & other) const;
 
 private:
 	float _red;
