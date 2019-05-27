@@ -18,6 +18,8 @@ public:
 	color operator+(const color & other) const;
 	color operator-(const color & other) const;
 
+	color operator*(float scalar) const;
+
 private:
 	float _red;
 	float _green;

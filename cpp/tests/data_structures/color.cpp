@@ -40,3 +40,10 @@ TEST_CASE("subtracting colors")
 	auto expected = color(0.2, 0.5, 0.5);
 	REQUIRE(expected == c1 - c2);
 }
+
+TEST_CASE("multiplying a color by a scalar")
+{
+	auto c = color(0.2, 0.3, 0.4);
+	auto expected = color(0.4, 0.6, 0.8);
+	REQUIRE(expected == c * 2);
+}
