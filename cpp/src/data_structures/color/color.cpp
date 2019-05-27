@@ -14,4 +14,12 @@ namespace data_structures
 	{
 		return !(*this == other);
 	}
+
+	color color::operator+(const color & other) const
+	{
+		return color(
+			_red + other._red,
+			_green + other._green,
+			_blue + other._blue);
+	}
 }
