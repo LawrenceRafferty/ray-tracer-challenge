@@ -12,6 +12,9 @@ public:
 	float getGreen() { return _green; }
 	float getBlue() { return _blue; }
 
+	bool operator==(const color & other) const;
+	bool operator!=(const color & other) const;
+
 private:
 	float _red;
 	float _green;
