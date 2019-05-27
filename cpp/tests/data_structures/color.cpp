@@ -47,3 +47,11 @@ TEST_CASE("multiplying a color by a scalar")
 	auto expected = color(0.4, 0.6, 0.8);
 	REQUIRE(expected == c * 2);
 }
+
+TEST_CASE("multiplying colors")
+{
+	auto c1 = color(1, 0.2, 0.4);
+	auto c2 = color(0.9, 1, 0.1);
+	auto expected = color(0.9, 0.2, 0.04);
+	REQUIRE(expected == c1 * c2);
+}

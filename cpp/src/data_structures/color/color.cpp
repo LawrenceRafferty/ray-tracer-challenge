@@ -38,4 +38,12 @@ color color::operator*(float scalar) const
 		_green * scalar,
 		_blue * scalar);
 }
+
+color color::operator*(const color & other) const
+{
+	return color(
+		_red * other._red,
+		_green * other._green,
+		_blue * other._blue);
+}
 } // namespace data_structures

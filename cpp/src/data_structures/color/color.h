@@ -19,6 +19,7 @@ public:
 	color operator-(const color & other) const;
 
 	color operator*(float scalar) const;
+	color operator*(const color & other) const;
 
 private:
 	float _red;
