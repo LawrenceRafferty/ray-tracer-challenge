@@ -1,5 +1,6 @@
 #include "four_tuple.h"
-#include "../float_utility/float_utility.h"
+#include <cmath>
+#include "../float_utility/float_utility.cpp"
 
 namespace data_structures
 {

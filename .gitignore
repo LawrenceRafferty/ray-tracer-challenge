@@ -2,3 +2,5 @@
 *.plist
 /cpp/tests/data_structures/four_tuple
 /cpp/tests/data_structures/four_tuple.dSYM/
+/cpp/src/exercises/projectiles/program
+/cpp/src/exercises/projectiles/program.dSYM/
