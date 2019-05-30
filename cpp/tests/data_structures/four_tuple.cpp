@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "../framework/catch.hpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
-#include "../../src/data_structures/float_utility/float_utility.cpp"
+#include "../../src/data_structures/float_utility.cpp"
 
 data_structures::four_tuple point(float x, float y, float z)
 {
