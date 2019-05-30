@@ -1,12 +1,21 @@
+#pragma once
+
 namespace data_structures
 {
 class color
 {
 public:
+	color()
+		: _red { 0 }
+		, _green { 0 }
+		, _blue { 0 }
+		{}
+
 	color(float red, float green, float blue)
-		: _red{red}, _green{green}, _blue{blue}
-	{
-	}
+		: _red { red }
+		, _green { green }
+		, _blue { blue }
+		{}
 
 	float getRed() { return _red; }
 	float getGreen() { return _green; }

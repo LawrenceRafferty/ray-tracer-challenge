@@ -1,5 +1,7 @@
 /.vscode/ipch/
 *.plist
+/cpp/tests/data_structures/canvas
+/cpp/tests/data_structures/canvas.dSYM/
 /cpp/tests/data_structures/color
 /cpp/tests/data_structures/color.dSYM/
 /cpp/tests/data_structures/four_tuple
