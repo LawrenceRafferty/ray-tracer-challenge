@@ -27,3 +27,11 @@ TEST_CASE("every pixel in a new canvas is black")
 			REQUIRE(black == c.getPixelAt(x, y));
 	}
 }
+
+TEST_CASE("writing pixels to a canvas")
+{
+	auto c = canvas(10, 20);
+	auto red = color(1, 0, 0);
+	c.setPixelAt(2, 3, red);
+	REQUIRE(red == c.getPixelAt(2, 3));
+}
