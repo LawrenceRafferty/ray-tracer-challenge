@@ -1,5 +1,6 @@
 /.vscode/ipch/
 *.plist
+*.ppm
 /cpp/tests/data_structures/canvas
 /cpp/tests/data_structures/canvas.dSYM/
 /cpp/tests/data_structures/color
