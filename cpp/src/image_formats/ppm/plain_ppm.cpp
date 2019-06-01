@@ -19,7 +19,7 @@ void writeHeader(std::stringstream & ppm, const canvas & c)
 
 int getColorComponent(float rgb)
 {
-	return std::max(0, std::min(255, static_cast<int>(std::ceil(255 * rgb))));
+	return std::max(0, std::min(255, static_cast<int>(std::round(255 * rgb))));
 }
 
 void writeColorComponent(std::stringstream & ppm, int colorComponent, int & lineLength)
