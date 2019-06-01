@@ -21,6 +21,7 @@ public:
 	four_tuple operator*(const four_tuple & t) const;
 
 	float getDeterminant() const;
+	matrix getSubmatrix(int removedRow, int removedColumn) const;
 	matrix getTransposed() const;
 
 	float getElementAt(int row, int column) const;

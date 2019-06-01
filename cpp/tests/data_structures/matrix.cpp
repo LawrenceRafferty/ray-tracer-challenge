@@ -275,3 +275,40 @@ TEST_CASE("calculating the determinant of a 2x2 matrix")
 
 	REQUIRE(17 == a.getDeterminant());
 }
+
+TEST_CASE("a submatrix of a 3x3 matrix is a 2x2 matrix")
+{
+	auto threeByThree = matrix
+	{
+		1, 5, 0,
+		-3, 2, 7,
+		0, 6, -3
+	};
+
+	auto twoByTwo = matrix{
+		-3, 2,
+		0, 6
+	};
+
+	REQUIRE(twoByTwo == threeByThree.getSubmatrix(0, 2));
+}
+
+TEST_CASE("a submatrix of a 4x4 matrix is a 3x3 matrix")
+{
+	auto fourByFour = matrix
+	{
+		-6, 1, 1, 6,
+		-8, 5, 8, 6,
+		-1, 0, 8, 2,
+		-7, 1, -1, 1
+	};
+
+	auto threeByThree = matrix
+		{
+		-6, 1, 6,
+		-8, 8, 6,
+		-7, -1, 1
+	};
+
+	REQUIRE(threeByThree == fourByFour.getSubmatrix(2, 1));
+}

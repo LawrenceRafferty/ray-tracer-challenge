@@ -109,6 +109,33 @@ float matrix::getDeterminant() const
 	throw std::out_of_range("Must be a 2x2 matrix.");
 }
 
+matrix matrix::getSubmatrix(int removedRow, int removedColumn) const
+{
+	auto s = matrix(_rows - 1, _columns - 1);
+
+	int newRow = 0;
+	for (int row = 0; row < _rows; row++)
+	{
+		if (row == removedRow)
+			continue;
+
+		int newColumn = 0;
+		for (int column = 0; column < _columns; column++)
+		{
+			if (column == removedColumn)
+				continue;
+
+			s.setElementAt(newRow, newColumn, getElementAt(row, column));
+
+			newColumn++;
+		}
+
+		newRow++;
+	}
+
+	return s;
+}
+
 matrix matrix::getTransposed() const
 {
 	auto m = matrix(_columns, _rows);
