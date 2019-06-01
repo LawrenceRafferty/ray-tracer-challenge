@@ -61,3 +61,45 @@ TEST_CASE("a 3x3 matrix ought to be representable")
 	REQUIRE(-2 == m.getElementAt(1, 1));
 	REQUIRE(1 == m.getElementAt(2, 2));
 }
+
+TEST_CASE("matrix equality with identical matrices")
+{
+	auto a = matrix
+	{
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
+
+	auto b = matrix
+	{
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
+
+	REQUIRE(a == b);
+}
+
+TEST_CASE("matrix equality with different matrices")
+{
+	auto a = matrix
+	{
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
+		5, 4, 3, 2
+	};
+
+	auto b = matrix
+	{
+		2, 3, 4, 5,
+		6, 7, 8, 9,
+		8, 7, 6, 5,
+		4, 3, 2, 1
+	};
+
+	REQUIRE(a != b);
+}

@@ -11,6 +11,9 @@ public:
 	matrix(int dimension);
 	matrix(std::initializer_list<float> elements);
 
+	bool operator==(const matrix & other) const;
+	bool operator!=(const matrix & other) const;
+
 	float getElementAt(int row, int column) const;
 
 private:
