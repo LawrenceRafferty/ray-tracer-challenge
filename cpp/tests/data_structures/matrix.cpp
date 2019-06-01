@@ -103,3 +103,78 @@ TEST_CASE("matrix equality with different matrices")
 
 	REQUIRE(a != b);
 }
+
+TEST_CASE("multiplying two matrices")
+{
+	auto a = matrix
+	{
+		1, 2, 3, 4, 
+		5, 6, 7, 8, 
+		9, 8, 7, 6, 
+		5, 4, 3, 2
+	};
+
+	auto b = matrix
+	{
+		-2, 1, 2, 3, 
+		3, 2, 1, -1, 
+		4, 3, 6, 5, 
+		1, 2, 7, 8
+	}; 
+	
+	auto expected = matrix
+	{
+		20, 22, 50, 48, 
+		44, 54, 114, 108, 
+		40, 58, 110, 102, 
+		16, 26, 46, 42
+	};
+ 
+	REQUIRE(expected == a * b);
+}
+
+TEST_CASE("constructing and inspecting a 2x4 matrix")
+{
+	auto m = matrix(2, 4,
+	{
+		1, 2, 3, 4,
+		5, 6, 7, 8
+	});
+
+	REQUIRE(1 == m.getElementAt(0, 0));
+	REQUIRE(2 == m.getElementAt(0, 1));
+	REQUIRE(3 == m.getElementAt(0, 2));
+	REQUIRE(4 == m.getElementAt(0, 3));
+	REQUIRE(5 == m.getElementAt(1, 0));
+	REQUIRE(6 == m.getElementAt(1, 1));
+	REQUIRE(7 == m.getElementAt(1, 2));
+	REQUIRE(8 == m.getElementAt(1, 3));
+}
+
+TEST_CASE("multiplying matrices with different dimensions")
+{
+	auto fourByThree = matrix(4, 3,
+	{
+		1, 1, 1,
+		2, 2, 2,
+		3, 3, 3,
+		4, 4, 4
+	});
+
+	auto threeByTwo = matrix(3, 2,
+	{
+		1, 2,
+		3, 4,
+		5, 6,
+	});
+
+	auto fourByTwo = matrix(4, 2,
+	{
+		9, 12,
+		18, 24,
+		27, 36,
+		36, 48
+	});
+
+	REQUIRE(fourByTwo == fourByThree * threeByTwo);
+}
