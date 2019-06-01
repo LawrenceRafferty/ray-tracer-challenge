@@ -337,3 +337,18 @@ TEST_CASE("calculating a minor of a 3x3 matrix")
 	REQUIRE(25 == b.getDeterminant());
 	REQUIRE(25 == a.getMinorOfElementAt(1, 0));
 }
+
+TEST_CASE("calculating a cofactor of a 3x3 matrix")
+{
+	auto a = matrix
+	{
+		3, 5, 0,
+		2, -1, -7,
+		6, -1, 5
+	};
+
+	REQUIRE(-12 == a.getMinorOfElementAt(0, 0));
+	REQUIRE(-12 == a.getCofactorOfElementAt(0, 0));
+	REQUIRE(25 == a.getMinorOfElementAt(1, 0));
+	REQUIRE(-25 == a.getCofactorOfElementAt(1, 0));
+}

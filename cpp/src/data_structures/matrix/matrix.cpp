@@ -114,6 +114,17 @@ four_tuple matrix::operator*(const four_tuple & t) const
 		product.getElementAt(3,0));
 }
 
+float matrix::getCofactorOfElementAt(int row, int column) const
+{
+	if (_rows == 3 && _columns == 3)
+	{
+		auto minor = getMinorOfElementAt(row, column);
+		return (row + column) % 2 == 0 ? minor : -minor;
+	}
+
+	throw std::out_of_range("Must be a 3x3 matrix.");
+}
+
 float get2x2Determinant(float a, float b, float c, float d)
 {
 	return a * d - b * c;

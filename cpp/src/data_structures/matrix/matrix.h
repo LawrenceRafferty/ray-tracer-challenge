@@ -23,6 +23,7 @@ public:
 	matrix operator*(const matrix & other) const;
 	four_tuple operator*(const four_tuple & t) const;
 
+	float getCofactorOfElementAt(int row, int column) const;
 	float getDeterminant() const;
 	float getMinorOfElementAt(int row, int column) const;
 	matrix getSubmatrix(int removedRow, int removedColumn) const;
