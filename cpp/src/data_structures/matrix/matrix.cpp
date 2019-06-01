@@ -34,6 +34,24 @@ matrix::matrix(int rows, int columns, std::initializer_list<float> elements)
 			throw std::invalid_argument("Must provide exactly enough elements to fill the specified rows and columns.");
 	}
 
+matrix::matrix(matrix && other)
+	: _rows { other._rows }
+	, _columns { other._columns }
+	, _data { std::move(other._data) }
+	{}
+
+matrix& matrix::operator=(matrix && other)
+{
+	if (this != &other)
+	{
+		_rows = other._rows;
+		_columns = other._columns;
+		_data = std::move(other._data);
+	}
+
+	return *this;
+}
+
 bool matrix::operator==(const matrix & other) const
 {
 	return _rows == other._rows &&
@@ -72,7 +90,7 @@ matrix matrix::operator*(const matrix & other) const
 		}
 	}
 
-	return m;
+	return std::move(m);
 }
 
 four_tuple matrix::operator*(const four_tuple & t) const
@@ -133,7 +151,7 @@ matrix matrix::getSubmatrix(int removedRow, int removedColumn) const
 		newRow++;
 	}
 
-	return s;
+	return std::move(s);
 }
 
 matrix matrix::getTransposed() const
@@ -144,7 +162,7 @@ matrix matrix::getTransposed() const
 		for (int column = 0; column < _columns; column++)
 			m.setElementAt(column, row, getElementAt(row, column));
 	}
-	return m;
+	return std::move(m);
 }
 
 float matrix::getElementAt(int row, int column) const

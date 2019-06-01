@@ -312,3 +312,14 @@ TEST_CASE("a submatrix of a 4x4 matrix is a 3x3 matrix")
 
 	REQUIRE(threeByThree == fourByFour.getSubmatrix(2, 1));
 }
+
+TEST_CASE("excercise move assignment")
+{
+	matrix m {2};
+	m = matrix
+	{
+		1, 2,
+		3, 4
+	};
+	REQUIRE(1 == m.getElementAt(0, 0));
+}

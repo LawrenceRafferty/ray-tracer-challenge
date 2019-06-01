@@ -13,6 +13,9 @@ public:
 	matrix(int rows, int columns);
 	matrix(std::initializer_list<float> elements);
 	matrix(int rows, int columns, std::initializer_list<float> elements);
+	matrix(matrix && other);
+
+	matrix & operator=(matrix && other);
 
 	bool operator==(const matrix & other) const;
 	bool operator!=(const matrix & other) const;
