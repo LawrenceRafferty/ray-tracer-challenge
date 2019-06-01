@@ -2,6 +2,7 @@
 
 #include <initializer_list>
 #include <vector>
+#include "../four_tuple/four_tuple.h"
 
 namespace data_structures
 {
@@ -17,6 +18,7 @@ public:
 	bool operator!=(const matrix & other) const;
 
 	matrix operator*(const matrix & other) const;
+	four_tuple operator*(const four_tuple & t) const;
 
 	float getElementAt(int row, int column) const;
 	void setElementAt(int row, int column, float element);

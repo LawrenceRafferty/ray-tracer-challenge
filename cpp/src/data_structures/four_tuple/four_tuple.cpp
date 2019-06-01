@@ -26,7 +26,7 @@ bool four_tuple::operator==(const four_tuple & other) const
 	return float_utility::are_equivalent(_x, other._x) &&
 		float_utility::are_equivalent(_y, other._y) &&
 		float_utility::are_equivalent(_z, other._z) &&
-		_w == other._w;
+		float_utility::are_equivalent(_w, other._w);
 }
 
 bool four_tuple::operator!=(const four_tuple & other) const

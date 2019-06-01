@@ -75,6 +75,27 @@ matrix matrix::operator*(const matrix & other) const
 	return m;
 }
 
+four_tuple matrix::operator*(const four_tuple & t) const
+{
+	if (_columns != 4)
+		throw std::invalid_argument("This matrix must have four columns to multiply it with a four tuple.");
+
+	auto m = matrix(4, 1,
+	{
+		t.getX(),
+		t.getY(),
+		t.getZ(),
+		t.getW()
+	});
+
+	auto product = *this * m;
+	return four_tuple(
+		product.getElementAt(0,0),
+		product.getElementAt(1,0),
+		product.getElementAt(2,0),
+		product.getElementAt(3,0));
+}
+
 float matrix::getElementAt(int row, int column) const
 {
 	return _data[getElementIndex(row, column)];

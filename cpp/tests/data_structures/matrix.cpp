@@ -1,7 +1,9 @@
 #define CATCH_CONFIG_MAIN
 #include "../framework/catch.hpp"
+#include "../../src/data_structures/four_tuple/four_tuple.cpp"
 #include "../../src/data_structures/matrix/matrix.cpp"
 
+using data_structures::four_tuple;
 using data_structures::matrix;
 
 TEST_CASE("a new matrix is initialized with zeros")
@@ -177,4 +179,19 @@ TEST_CASE("multiplying matrices with different dimensions")
 	});
 
 	REQUIRE(fourByTwo == fourByThree * threeByTwo);
+}
+
+TEST_CASE("a matrix multiplied by a tuple")
+{
+	auto a = matrix
+	{
+		1, 2, 3, 4,
+		2, 4, 4, 2,
+		8, 6, 4, 1,
+		0, 0, 0, 1
+	};
+
+	auto b = four_tuple(1, 2, 3, 1);
+	auto expected = four_tuple(18, 24, 33, 1);
+	REQUIRE(expected == a * b);
 }
