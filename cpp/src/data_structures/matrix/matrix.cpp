@@ -127,6 +127,14 @@ float matrix::getDeterminant() const
 	throw std::out_of_range("Must be a 2x2 matrix.");
 }
 
+float matrix::getMinorOfElementAt(int row, int column) const
+{
+	if (_rows == 3 && _columns == 3)
+		return getSubmatrix(row, column).getDeterminant();
+
+	throw std::out_of_range("Must be a 3x3 matrix.");
+}
+
 matrix matrix::getSubmatrix(int removedRow, int removedColumn) const
 {
 	auto s = matrix(_rows - 1, _columns - 1);

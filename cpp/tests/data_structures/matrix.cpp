@@ -323,3 +323,17 @@ TEST_CASE("excercise move assignment")
 	};
 	REQUIRE(1 == m.getElementAt(0, 0));
 }
+
+TEST_CASE("calculating a minor of a 3x3 matrix")
+{
+	auto a = matrix
+	{
+		3, 5, 0,
+		2, -1, -7,
+		6, -1, 5
+	};
+
+	auto b = a.getSubmatrix(1, 0);
+	REQUIRE(25 == b.getDeterminant());
+	REQUIRE(25 == a.getMinorOfElementAt(1, 0));
+}
