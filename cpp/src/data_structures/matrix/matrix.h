@@ -35,6 +35,6 @@ private:
 
 	int _rows;
 	int _columns;
-	std::vector<float> _data;
+	std::vector<float> _elements;
 };
 } // namespace data_structures

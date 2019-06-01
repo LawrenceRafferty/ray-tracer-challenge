@@ -8,17 +8,17 @@ namespace data_structures
 matrix::matrix(int dimension)
 	: _rows { dimension }
 	, _columns { dimension }
-	, _data { std::vector<float>(dimension * dimension) }
+	, _elements { std::vector<float>(dimension * dimension) }
 	{}
 
 matrix::matrix(int rows, int columns)
 	: _rows { rows }
 	, _columns { columns }
-	, _data { std::vector<float>(rows * columns) }
+	, _elements { std::vector<float>(rows * columns) }
 	{}
 
 matrix::matrix(std::initializer_list<float> elements)
-	:  _data{std::vector<float>(elements) }
+	:  _elements{std::vector<float>(elements) }
 	{
 		_rows = _columns = static_cast<int>(std::round(sqrt(elements.size())));
 		if (_rows * _columns != elements.size())
@@ -28,7 +28,7 @@ matrix::matrix(std::initializer_list<float> elements)
 matrix::matrix(int rows, int columns, std::initializer_list<float> elements)
 	: _rows { rows }
 	, _columns { columns }
-	, _data{std::vector<float>(elements) }
+	, _elements{std::vector<float>(elements) }
 	{
 		if (rows * columns != elements.size())
 			throw std::invalid_argument("Must provide exactly enough elements to fill the specified rows and columns.");
@@ -37,7 +37,7 @@ matrix::matrix(int rows, int columns, std::initializer_list<float> elements)
 matrix::matrix(matrix && other)
 	: _rows { other._rows }
 	, _columns { other._columns }
-	, _data { std::move(other._data) }
+	, _elements { std::move(other._elements) }
 	{}
 
 matrix& matrix::operator=(matrix && other)
@@ -46,7 +46,7 @@ matrix& matrix::operator=(matrix && other)
 	{
 		_rows = other._rows;
 		_columns = other._columns;
-		_data = std::move(other._data);
+		_elements = std::move(other._elements);
 	}
 
 	return *this;
@@ -57,8 +57,8 @@ bool matrix::operator==(const matrix & other) const
 	return _rows == other._rows &&
 		_columns == other._columns &&
 		std::equal(
-			_data.begin(), _data.end(),
-			other._data.begin(),
+			_elements.begin(), _elements.end(),
+			other._elements.begin(),
 			float_utility::are_equivalent);
 }
 
@@ -122,7 +122,7 @@ float get2x2Determinant(float a, float b, float c, float d)
 float matrix::getDeterminant() const
 {
 	if (_rows == 2 && _columns == 2)
-		return get2x2Determinant(_data.at(0), _data.at(1), _data.at(2), _data.at(3));
+		return get2x2Determinant(_elements.at(0), _elements.at(1), _elements.at(2), _elements.at(3));
 
 	throw std::out_of_range("Must be a 2x2 matrix.");
 }
@@ -167,12 +167,12 @@ matrix matrix::getTransposed() const
 
 float matrix::getElementAt(int row, int column) const
 {
-	return _data[getElementIndex(row, column)];
+	return _elements[getElementIndex(row, column)];
 }
 
 void matrix::setElementAt(int row, int column, float element)
 {
-	_data[getElementIndex(row, column)] = element;
+	_elements[getElementIndex(row, column)] = element;
 }
 
 int matrix::getElementIndex(int row, int column) const
