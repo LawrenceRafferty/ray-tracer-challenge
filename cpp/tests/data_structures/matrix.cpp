@@ -195,3 +195,38 @@ TEST_CASE("a matrix multiplied by a tuple")
 	auto expected = four_tuple(18, 24, 33, 1);
 	REQUIRE(expected == a * b);
 }
+
+TEST_CASE("multiplying a matrix by the identity matrix")
+{
+	auto a = matrix
+	{
+		0, 1, 2, 4,
+		1, 2, 4, 8,
+		2, 4, 8, 16,
+		4, 8, 16, 32
+	};
+
+	auto identity = matrix
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	REQUIRE(a == a * identity);
+}
+
+TEST_CASE("multiplying the identity matrix by a tuple")
+{
+	auto a = four_tuple(1, 2, 3, 4);
+	auto identity = matrix
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	REQUIRE(a == identity * a);
+}
