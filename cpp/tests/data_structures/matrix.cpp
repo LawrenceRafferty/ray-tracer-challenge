@@ -264,3 +264,14 @@ TEST_CASE("transposing the identity matrix")
 	auto a = identity.getTransposed();
 	REQUIRE(identity == a);
 }
+
+TEST_CASE("calculating the determinant of a 2x2 matrix")
+{
+	auto a = matrix
+	{
+		1, 5,
+		-3, 2
+	};
+
+	REQUIRE(17 == a.getDeterminant());
+}

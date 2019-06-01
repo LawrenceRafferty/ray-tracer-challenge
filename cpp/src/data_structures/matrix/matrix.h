@@ -20,6 +20,7 @@ public:
 	matrix operator*(const matrix & other) const;
 	four_tuple operator*(const four_tuple & t) const;
 
+	float getDeterminant() const;
 	matrix getTransposed() const;
 
 	float getElementAt(int row, int column) const;

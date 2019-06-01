@@ -96,6 +96,19 @@ four_tuple matrix::operator*(const four_tuple & t) const
 		product.getElementAt(3,0));
 }
 
+float get2x2Determinant(float a, float b, float c, float d)
+{
+	return a * d - b * c;
+}
+
+float matrix::getDeterminant() const
+{
+	if (_rows == 2 && _columns == 2)
+		return get2x2Determinant(_data.at(0), _data.at(1), _data.at(2), _data.at(3));
+
+	throw std::out_of_range("Must be a 2x2 matrix.");
+}
+
 matrix matrix::getTransposed() const
 {
 	auto m = matrix(_columns, _rows);
