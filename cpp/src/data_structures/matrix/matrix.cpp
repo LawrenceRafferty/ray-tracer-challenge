@@ -96,6 +96,17 @@ four_tuple matrix::operator*(const four_tuple & t) const
 		product.getElementAt(3,0));
 }
 
+matrix matrix::transpose() const
+{
+	auto m = matrix(_columns, _rows);
+	for (int row = 0; row < _rows; row++)
+	{
+		for (int column = 0; column < _columns; column++)
+			m.setElementAt(column, row, getElementAt(row, column));
+	}
+	return m;
+}
+
 float matrix::getElementAt(int row, int column) const
 {
 	return _data[getElementIndex(row, column)];

@@ -230,3 +230,37 @@ TEST_CASE("multiplying the identity matrix by a tuple")
 
 	REQUIRE(a == identity * a);
 }
+
+TEST_CASE("transposing a matrix")
+{
+	auto a = matrix
+	{
+		0, 9, 3, 0,
+		9, 8, 0, 8,
+		1, 8, 5, 3,
+		0, 0, 5, 8
+	};
+
+	auto expected = matrix
+	{
+		0, 9, 1, 0,
+		9, 8, 8, 0,
+		3, 0, 5, 5,
+		0, 8, 3, 8
+	};
+
+	REQUIRE(expected == a.transpose());
+}
+
+TEST_CASE("transposing the identity matrix")
+{
+	auto identity = matrix
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+	auto a = identity.transpose();
+	REQUIRE(identity == a);
+}
