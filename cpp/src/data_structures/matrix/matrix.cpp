@@ -96,7 +96,7 @@ four_tuple matrix::operator*(const four_tuple & t) const
 		product.getElementAt(3,0));
 }
 
-matrix matrix::transpose() const
+matrix matrix::getTransposed() const
 {
 	auto m = matrix(_columns, _rows);
 	for (int row = 0; row < _rows; row++)

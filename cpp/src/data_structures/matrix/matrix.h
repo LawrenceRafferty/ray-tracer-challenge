@@ -20,7 +20,7 @@ public:
 	matrix operator*(const matrix & other) const;
 	four_tuple operator*(const four_tuple & t) const;
 
-	matrix transpose() const;
+	matrix getTransposed() const;
 
 	float getElementAt(int row, int column) const;
 	void setElementAt(int row, int column, float element);

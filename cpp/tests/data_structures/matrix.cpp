@@ -249,7 +249,7 @@ TEST_CASE("transposing a matrix")
 		0, 8, 3, 8
 	};
 
-	REQUIRE(expected == a.transpose());
+	REQUIRE(expected == a.getTransposed());
 }
 
 TEST_CASE("transposing the identity matrix")
@@ -261,6 +261,6 @@ TEST_CASE("transposing the identity matrix")
 		0, 0, 1, 0,
 		0, 0, 0, 1
 	};
-	auto a = identity.transpose();
+	auto a = identity.getTransposed();
 	REQUIRE(identity == a);
 }
