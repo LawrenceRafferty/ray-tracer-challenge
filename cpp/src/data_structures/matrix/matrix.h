@@ -19,6 +19,7 @@ public:
 	static matrix rotation_y(float radians);
 	static matrix rotation_z(float radians);
 	static matrix scaling(float x, float y, float z);
+	static matrix shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 	static matrix translation(float x, float y, float z);
 
 	matrix & operator=(matrix && other);

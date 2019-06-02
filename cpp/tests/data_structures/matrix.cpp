@@ -618,3 +618,40 @@ TEST_CASE("rotating a point around the z axis")
 	expected = four_tuple::point(-1, 0, 0);
 	REQUIRE(expected == full_quarter * p);
 }
+
+void shearing_point_2_3_4(four_tuple expected, float xy, float xz, float yx, float yz, float zx, float zy)
+{
+	auto transform = matrix::shearing(xy, xz, yx, yz, zx, zy);
+	auto p = four_tuple::point(2, 3, 4);
+	REQUIRE(expected == transform * p);
+}
+
+TEST_CASE("a shearing transformation moves x in proportion to y")
+{
+	shearing_point_2_3_4(four_tuple::point(5, 3, 4), 1, 0, 0, 0, 0, 0);
+}
+
+TEST_CASE("a shearing transformation moves x in proportion to z")
+{
+	shearing_point_2_3_4(four_tuple::point(6, 3, 4), 0, 1, 0, 0, 0, 0);
+}
+
+TEST_CASE("a shearing transformation moves y in proportion to x")
+{
+	shearing_point_2_3_4(four_tuple::point(2, 5, 4), 0, 0, 1, 0, 0, 0);
+}
+
+TEST_CASE("a shearing transformation moves y in proportion to z")
+{
+	shearing_point_2_3_4(four_tuple::point(2, 7, 4), 0, 0, 0, 1, 0, 0);
+}
+
+TEST_CASE("a shearing transformation moves z in proportion to x")
+{
+	shearing_point_2_3_4(four_tuple::point(2, 3, 6), 0, 0, 0, 0, 1, 0);
+}
+
+TEST_CASE("a shearing transformation moves z in proportion to y")
+{
+	shearing_point_2_3_4(four_tuple::point(2, 3, 7), 0, 0, 0, 0, 0, 1);
+}

@@ -90,6 +90,17 @@ matrix matrix::scaling(float x, float y, float z)
 	});
 }
 
+matrix matrix::shearing(float xy, float xz, float yx, float yz, float zx, float zy)
+{
+	return std::move(matrix
+	{
+		1, xy, xz, 0,
+		yx, 1, yz, 0,
+		zx, zy, 1, 0,
+		0, 0, 0, 1
+	});
+}
+
 matrix matrix::translation(float x, float y, float z)
 {
 	return std::move(matrix
