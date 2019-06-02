@@ -82,7 +82,7 @@ matrix matrix::operator*(const matrix & other) const
 	{
 		for (int column = 0; column < columns; column++)
 		{
-			auto element = 0;
+			float element = 0;
 			for (int index = 0; index < sharedDimension; index++)
 				element += getElementAt(row, index) * other.getElementAt(index, column);
 

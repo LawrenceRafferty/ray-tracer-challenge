@@ -21,9 +21,9 @@ TEST_CASE("constructing and inspecting a 4x4 matrix")
 {
 	auto m = matrix
 	{
-		1, 2, 3, 4, 
-		5.5, 6.5, 7.5, 8.5, 
-		9, 10, 11, 12, 
+		1, 2, 3, 4,
+		5.5, 6.5, 7.5, 8.5,
+		9, 10, 11, 12,
 		13.5, 14.5, 15.5, 16.5
 	};
 
@@ -110,28 +110,28 @@ TEST_CASE("multiplying two matrices")
 {
 	auto a = matrix
 	{
-		1, 2, 3, 4, 
-		5, 6, 7, 8, 
-		9, 8, 7, 6, 
+		1, 2, 3, 4,
+		5, 6, 7, 8,
+		9, 8, 7, 6,
 		5, 4, 3, 2
 	};
 
 	auto b = matrix
 	{
-		-2, 1, 2, 3, 
-		3, 2, 1, -1, 
-		4, 3, 6, 5, 
+		-2, 1, 2, 3,
+		3, 2, 1, -1,
+		4, 3, 6, 5,
 		1, 2, 7, 8
-	}; 
-	
+	};
+
 	auto expected = matrix
 	{
-		20, 22, 50, 48, 
-		44, 54, 114, 108, 
-		40, 58, 110, 102, 
+		20, 22, 50, 48,
+		44, 54, 114, 108,
+		40, 58, 110, 102,
 		16, 26, 46, 42
 	};
- 
+
 	REQUIRE(expected == a * b);
 }
 
@@ -361,7 +361,7 @@ TEST_CASE("calculating the determinant of a 3x3 matrix")
 		-5, 8, -4,
 		2, 6, 4
 	};
-	
+
 	REQUIRE(56 == a.getCofactorOfElementAt(0, 0));
 	REQUIRE(12 == a.getCofactorOfElementAt(0, 1));
 	REQUIRE(-46 == a.getCofactorOfElementAt(0, 2));
@@ -429,14 +429,92 @@ TEST_CASE("calculating the inverse of a matrix")
 	REQUIRE(-160.0f / 532.0f == b.getElementAt(3, 2));
 	REQUIRE(105 == a.getCofactorOfElementAt(3, 2));
 	REQUIRE(105.0f / 532.0f == b.getElementAt(2, 3));
-	
+
 	auto expected = matrix
 	{
-		0.21805, 0.45113, 0.24060, -0.04511, 
-		-0.80827, -1.45677, -0.44361, 0.52068, 
-		-0.07895, -0.22368, -0.05263, 0.19737, 
+		0.21805, 0.45113, 0.24060, -0.04511,
+		-0.80827, -1.45677, -0.44361, 0.52068,
+		-0.07895, -0.22368, -0.05263, 0.19737,
 		-0.52256, -0.81391, -0.30075, 0.30639
 	};
 
 	REQUIRE(expected == b);
+}
+
+TEST_CASE("calculating the inverse of another matrix")
+{
+	auto a = matrix
+	{
+		8, -5, 9, 2,
+		7, 5, 6, 1,
+		-6, 0, 9, 6,
+		-3, 0, -9, -4
+	};
+
+	auto expected = matrix
+	{
+		-0.15385, -0.15385, -0.28205, -0.53846,
+		-0.07692, 0.12308, 0.02564, 0.03077,
+		0.35897, 0.35897, 0.43590, 0.92308,
+		-0.69231, -0.69231, -0.76923, -1.92308
+	};
+
+	REQUIRE(expected == a.getInverse());
+}
+
+TEST_CASE("calculating the inverse of a third matrix")
+{
+	auto a = matrix
+	{
+		9, 3, 0, 9,
+		-5, -2, -6, -3,
+		-4, 9, 6, 4,
+		-7, 6, 6, 2
+	};
+
+	auto expected = matrix
+	{
+		-0.04074, -0.07778, 0.14444, -0.22222,
+		-0.07778, 0.03333, 0.36667, -0.33333,
+		-0.02901, -0.14630, -0.10926, 0.12963,
+		0.17778, 0.06667, -0.26667, 0.33333
+	};
+
+	REQUIRE(expected == a.getInverse());
+}
+
+TEST_CASE("multiplying a product by its inverse")
+{
+	auto identity = matrix
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	auto a = matrix
+	{
+		3, -9, 7, 3,
+		3, -8, 2, -9,
+		-4, 4, 4, 1,
+		-6, 5, -1, 1
+	};
+
+	auto inverse_a = a.getInverse();
+	REQUIRE(identity == a * inverse_a);
+
+	auto b = matrix
+	{
+		8, 2, 2, 2,
+		3, -1, 7, 0,
+		7, 0, 5, 4,
+		6, -2, 0, 5
+	};
+
+	auto inverse_b = b.getInverse();
+	REQUIRE(identity == b * inverse_b);
+
+	auto c = a * b;
+	REQUIRE(a == c * inverse_b);
 }
