@@ -28,7 +28,9 @@ public:
 	float getMinorOfElementAt(int row, int column) const;
 	matrix getSubmatrix(int removedRow, int removedColumn) const;
 	matrix getTransposed() const;
+
 	bool isInvertible() const;
+	matrix getInverse() const;
 
 	float getElementAt(int row, int column) const;
 	void setElementAt(int row, int column, float element);
