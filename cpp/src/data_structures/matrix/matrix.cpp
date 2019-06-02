@@ -199,28 +199,22 @@ matrix matrix::getInverse() const
 	if (_rows != _columns)
 		throw std::invalid_argument("Must be a square matrix.");
 
-	auto cofactors = matrix(_rows);
+	auto determinant = getDeterminant();
+	if (determinant == 0)
+		throw std::logic_error("Must be an invterible matrix.");
+
+	auto inverse = matrix(_rows);
 	for (int row = 0; row < _rows; row++)
 	{
 		for (int column = 0; column < _columns; column++)
 		{
 			auto cofactor = getCofactorOfElementAt(row, column);
-			cofactors.setElementAt(row, column, cofactor);
+			// reverse row and column to accomplish transposition
+			inverse.setElementAt(column, row, cofactor / determinant);
 		}
 	}
 
-	auto determinant = getDeterminant();
-	auto final = cofactors.getTransposed();
-	for (int row = 0; row < _rows; row++)
-	{
-		for (int column = 0; column < _columns; column++)
-		{
-			auto transposedCofactorDividedByDeterminant = final.getElementAt(row, column) / determinant;
-			final.setElementAt(row, column, transposedCofactorDividedByDeterminant);
-		}
-	}
-
-	return std::move(final);
+	return std::move(inverse);
 }
 
 float matrix::getElementAt(int row, int column) const
