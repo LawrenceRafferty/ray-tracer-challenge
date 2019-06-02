@@ -15,6 +15,7 @@ public:
 	matrix(int rows, int columns, std::initializer_list<float> elements);
 	matrix(matrix && other);
 
+	static matrix scaling(float x, float y, float z);
 	static matrix translation(float x, float y, float z);
 
 	matrix & operator=(matrix && other);

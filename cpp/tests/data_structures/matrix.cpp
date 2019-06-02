@@ -542,3 +542,36 @@ TEST_CASE("translation does not affect vectors")
 	auto v = four_tuple::vector(-3, 4, 5);
 	REQUIRE(v == transform * v);
 }
+
+TEST_CASE("a scaling matrix applied to a point")
+{
+	auto transform = matrix::scaling(2, 3, 4);
+	auto p = four_tuple::point (-4, 6, 8);
+	auto expected = four_tuple::point(-8, 18, 32);
+	REQUIRE(expected == transform * p);
+}
+
+TEST_CASE("a scaling matrix applied to a vector")
+{
+	auto transform = matrix::scaling(2, 3, 4);
+	auto v = four_tuple::vector(-4, 6, 8);
+	auto expected = four_tuple::vector(-8, 18, 32);
+	REQUIRE(expected == transform * v);
+}
+
+TEST_CASE("multiplying by the inverse of a scaling matrix")
+{
+	auto transform = matrix::scaling(2, 3, 4);
+	auto inverse = transform.getInverse();
+	auto v = four_tuple::vector(-4, 6, 8);
+	auto expected = four_tuple::vector(-2, 2, 2);
+	REQUIRE(expected == inverse * v);
+}
+
+TEST_CASE("reflection is scaling by a negative value")
+{
+	auto transform = matrix::scaling(-1, 1, 1);
+	auto p = four_tuple::point(2, 3, 4);
+	auto expected = four_tuple::point(-2, 3, 4);
+	REQUIRE(expected == transform * p);
+}

@@ -40,6 +40,17 @@ matrix::matrix(matrix && other)
 	, _elements { std::move(other._elements) }
 	{}
 
+matrix matrix::scaling(float x, float y, float z)
+{
+	return std::move(matrix
+	{
+		x, 0, 0, 0,
+		0, y, 0, 0,
+		0, 0, z, 0,
+		0, 0, 0, 1
+	});
+}
+
 matrix matrix::translation(float x, float y, float z)
 {
 	return std::move(matrix
