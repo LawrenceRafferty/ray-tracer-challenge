@@ -352,3 +352,35 @@ TEST_CASE("calculating a cofactor of a 3x3 matrix")
 	REQUIRE(25 == a.getMinorOfElementAt(1, 0));
 	REQUIRE(-25 == a.getCofactorOfElementAt(1, 0));
 }
+
+TEST_CASE("calculating the determinant of a 3x3 matrix")
+{
+	auto a = matrix
+	{
+		1, 2, 6,
+		-5, 8, -4,
+		2, 6, 4
+	};
+	
+	REQUIRE(56 == a.getCofactorOfElementAt(0, 0));
+	REQUIRE(12 == a.getCofactorOfElementAt(0, 1));
+	REQUIRE(-46 == a.getCofactorOfElementAt(0, 2));
+	REQUIRE(-196 == a.getDeterminant());
+}
+
+TEST_CASE("calculating the determinant of a 4x4 matrix")
+{
+	auto a = matrix
+	{
+		-2, -8, 3, 5,
+		-3, 1, 7, 3,
+		1, 2, -9, 6,
+		-6, 7, 7, -9
+	};
+
+	REQUIRE(690 == a.getCofactorOfElementAt(0, 0));
+	REQUIRE(447 == a.getCofactorOfElementAt(0, 1));
+	REQUIRE(210 == a.getCofactorOfElementAt(0, 2));
+	REQUIRE(51 == a.getCofactorOfElementAt(0, 3));
+	REQUIRE(-4071 == a.getDeterminant());
+}

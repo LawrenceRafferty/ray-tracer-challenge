@@ -116,34 +116,38 @@ four_tuple matrix::operator*(const four_tuple & t) const
 
 float matrix::getCofactorOfElementAt(int row, int column) const
 {
-	if (_rows == 3 && _columns == 3)
-	{
-		auto minor = getMinorOfElementAt(row, column);
-		return (row + column) % 2 == 0 ? minor : -minor;
-	}
+	if (_rows != _columns)
+		throw std::invalid_argument("Must be a square matrix.");
+	if (_rows <= 2)
+		throw std::out_of_range("Must be 3x3 or larger.");
 
-	throw std::out_of_range("Must be a 3x3 matrix.");
-}
-
-float get2x2Determinant(float a, float b, float c, float d)
-{
-	return a * d - b * c;
+	auto minor = getMinorOfElementAt(row, column);
+	return (row + column) % 2 == 0 ? minor : -minor;
 }
 
 float matrix::getDeterminant() const
 {
 	if (_rows == 2 && _columns == 2)
-		return get2x2Determinant(_elements.at(0), _elements.at(1), _elements.at(2), _elements.at(3));
+		return _elements.at(0) * _elements.at(3) - _elements.at(1) * _elements.at(2);
 
-	throw std::out_of_range("Must be a 2x2 matrix.");
+	if (_rows != _columns)
+		throw std::invalid_argument("Must be a square matrix.");
+	
+	float determinant = 0;
+	for (int column = 0; column < _columns; column++)
+		determinant += _elements.at(column) * getCofactorOfElementAt(0, column);
+
+	return determinant;
 }
 
 float matrix::getMinorOfElementAt(int row, int column) const
 {
-	if (_rows == 3 && _columns == 3)
-		return getSubmatrix(row, column).getDeterminant();
+	if (_rows != _columns)
+		throw std::invalid_argument("Must be a square matrix.");
+	if (_rows <= 2)
+		throw std::out_of_range("Must be 3x3 or larger.");
 
-	throw std::out_of_range("Must be a 3x3 matrix.");
+	return getSubmatrix(row, column).getDeterminant();
 }
 
 matrix matrix::getSubmatrix(int removedRow, int removedColumn) const
