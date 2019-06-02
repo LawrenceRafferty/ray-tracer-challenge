@@ -112,6 +112,41 @@ matrix matrix::translation(float x, float y, float z)
 	});
 }
 
+matrix matrix::getRotated_x(float radians) const
+{
+	auto transform = matrix::rotation_x(radians);
+	return std::move(transform * *this);
+}
+
+matrix matrix::getRotated_y(float radians) const
+{
+	auto transform = matrix::rotation_y(radians);
+	return std::move(transform * *this);
+}
+
+matrix matrix::getRotated_z(float radians) const
+{
+	auto transform = matrix::rotation_z(radians);
+	return std::move(transform * *this);
+}
+
+matrix matrix::getScaled(float x, float y, float z) const {
+	auto transform = matrix::scaling(x, y, z);
+	return std::move(transform * *this);
+}
+
+matrix matrix::getSheared(float xy, float xz, float yx, float yz, float zx, float zy) const
+{
+	auto transform = matrix::shearing(xy, xz, yx, yz, zx, zy);
+	return std::move(transform * *this);
+}
+
+matrix matrix::getTranslated(float x, float y, float z) const
+{
+	auto transform = matrix::translation(x, y, z);
+	return std::move(transform * *this);
+}
+
 matrix& matrix::operator=(matrix && other)
 {
 	if (this != &other)

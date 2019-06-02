@@ -33,7 +33,14 @@ public:
 	float getCofactorOfElementAt(int row, int column) const;
 	float getDeterminant() const;
 	float getMinorOfElementAt(int row, int column) const;
+
+	matrix getRotated_x(float radians) const;
+	matrix getRotated_y(float radians) const;
+	matrix getRotated_z(float radians) const;
+	matrix getScaled(float x, float y, float z) const;
+	matrix getSheared(float xy, float xz, float yx, float yz, float zx, float zy) const;
 	matrix getSubmatrix(int removedRow, int removedColumn) const;
+	matrix getTranslated(float x, float y, float z) const;
 	matrix getTransposed() const;
 
 	bool isInvertible() const;

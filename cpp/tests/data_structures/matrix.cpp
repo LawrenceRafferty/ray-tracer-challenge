@@ -655,3 +655,58 @@ TEST_CASE("a shearing transformation moves z in proportion to y")
 {
 	shearing_point_2_3_4(four_tuple::point(2, 3, 7), 0, 0, 0, 0, 0, 1);
 }
+
+TEST_CASE("individual transformations are applied in sequence")
+{
+	auto p = four_tuple::point(1, 0, 1);
+	auto a = matrix::rotation_x(M_PI_2);
+	auto b = matrix::scaling(5, 5, 5);
+	auto c = matrix::translation(10, 5, 7);
+	// apply rotation first
+	auto p2 = a * p;
+	auto expected = four_tuple::point(1, -1, 0);
+	REQUIRE(expected == p2);
+	// then apply scaling
+	auto p3 = b * p2;
+	expected = four_tuple::point(5, -5, 0);
+	REQUIRE(expected == p3);
+	// then apply translation
+	auto p4 = c * p3;
+	expected = four_tuple::point(15, 0, 7);
+	REQUIRE(expected == p4);
+}
+
+TEST_CASE("chained transformations must be applied in reverse order")
+{
+	auto p = four_tuple::point(1, 0, 1);
+	auto a = matrix::rotation_x(M_PI_2);
+	auto b = matrix::scaling(5, 5, 5);
+	auto c = matrix::translation(10, 5, 7);
+	auto t = c * b * a;
+	auto expected = four_tuple::point(15, 0, 7);
+	REQUIRE(expected == t * p);
+}
+
+TEST_CASE("fluent transformations")
+{
+	auto a = matrix
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+
+	auto transformation = matrix::rotation_x(M_PI_4);
+	REQUIRE(transformation * a == a.getRotated_x(M_PI_4));
+	transformation = matrix::rotation_y(M_PI_4);
+	REQUIRE(transformation * a == a.getRotated_y(M_PI_4));
+	transformation = matrix::rotation_z(M_PI_4);
+	REQUIRE(transformation * a == a.getRotated_z(M_PI_4));
+	transformation = matrix::scaling(1, 2, 3);
+	REQUIRE(transformation * a == a.getScaled(1, 2, 3));
+	transformation = matrix::shearing(1, 2, 3, 4, 5, 6);
+	REQUIRE(transformation * a == a.getSheared(1, 2, 3, 4, 5, 6));
+	transformation = matrix::translation(1, 2, 3);
+	REQUIRE(transformation * a == a.getTranslated(1, 2, 3));
+}
