@@ -384,3 +384,31 @@ TEST_CASE("calculating the determinant of a 4x4 matrix")
 	REQUIRE(51 == a.getCofactorOfElementAt(0, 3));
 	REQUIRE(-4071 == a.getDeterminant());
 }
+
+TEST_CASE("testing an invertible matrix for invertibility")
+{
+	auto a = matrix
+	{
+		6, 4, 4, 4,
+		5, 5, 7, 6,
+		4, -9, 3, -7,
+		9, 1, 7, -6
+	};
+
+	REQUIRE(-2120 == a.getDeterminant());
+	REQUIRE(true == a.isInvertible());
+}
+
+TEST_CASE("testing a noninvertible matrix for invertibility")
+{
+	auto a = matrix
+	{
+		-4, 2, -2, -3,
+		9, 6, 2, 6,
+		0, -5, 1, -5,
+		0, 0, 0, 0
+	};
+
+	REQUIRE(0 == a.getDeterminant());
+	REQUIRE(false == a.isInvertible());
+}

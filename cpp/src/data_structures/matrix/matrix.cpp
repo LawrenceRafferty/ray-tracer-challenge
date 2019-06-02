@@ -188,6 +188,12 @@ matrix matrix::getTransposed() const
 	return std::move(m);
 }
 
+bool matrix::isInvertible() const
+{
+	// ASSUME: equality is sufficient
+	return getDeterminant() != 0;
+}
+
 float matrix::getElementAt(int row, int column) const
 {
 	return _elements[getElementIndex(row, column)];
