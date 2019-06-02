@@ -40,6 +40,45 @@ matrix::matrix(matrix && other)
 	, _elements { std::move(other._elements) }
 	{}
 
+matrix matrix::rotation_x(float radians)
+{
+	auto c = cos(radians);
+	auto s = sin(radians);
+	return std::move(matrix
+	{
+		1, 0, 0, 0,
+		0, c, -s, 0,
+		0, s, c, 0,
+		0, 0, 0, 1
+	});
+}
+
+matrix matrix::rotation_y(float radians)
+{
+	auto c = cos(radians);
+	auto s = sin(radians);
+	return std::move(matrix
+	{
+		c, 0, s, 0,
+		0, 1, 0, 0,
+		-s, 0, c, 0,
+		0, 0, 0, 1
+	});
+}
+
+matrix matrix::rotation_z(float radians)
+{
+	auto c = cos(radians);
+	auto s = sin(radians);
+	return std::move(matrix
+	{
+		c, -s, 0, 0,
+		s, c, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	});
+}
+
 matrix matrix::scaling(float x, float y, float z)
 {
 	return std::move(matrix

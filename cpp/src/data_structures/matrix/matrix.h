@@ -15,6 +15,9 @@ public:
 	matrix(int rows, int columns, std::initializer_list<float> elements);
 	matrix(matrix && other);
 
+	static matrix rotation_x(float radians);
+	static matrix rotation_y(float radians);
+	static matrix rotation_z(float radians);
 	static matrix scaling(float x, float y, float z);
 	static matrix translation(float x, float y, float z);
 

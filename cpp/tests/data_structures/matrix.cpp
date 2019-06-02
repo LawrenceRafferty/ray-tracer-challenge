@@ -1,4 +1,5 @@
 #define CATCH_CONFIG_MAIN
+#include <cmath>
 #include "../framework/catch.hpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
 #include "../../src/data_structures/matrix/matrix.cpp"
@@ -574,4 +575,46 @@ TEST_CASE("reflection is scaling by a negative value")
 	auto p = four_tuple::point(2, 3, 4);
 	auto expected = four_tuple::point(-2, 3, 4);
 	REQUIRE(expected == transform * p);
+}
+
+TEST_CASE("rotating a point around the x axis")
+{
+	auto p = four_tuple::point(0, 1, 0);
+	auto half_quarter = matrix::rotation_x(M_PI_4);
+	auto full_quarter = matrix::rotation_x(M_PI_2);
+	auto expected = four_tuple::point(0, sqrt(2)/2, sqrt(2)/2);
+	REQUIRE(expected == half_quarter * p);
+	expected = four_tuple::point(0, 0, 1);
+	REQUIRE(expected == full_quarter * p);
+}
+
+TEST_CASE("the inverse of an x-rotation rotates in the opposite direction")
+{
+	auto p = four_tuple::point(0, 1, 0);
+	auto half_quarter = matrix::rotation_x(M_PI_4);
+	auto inverse = half_quarter.getInverse();
+	auto expected = four_tuple::point(0, sqrt(2)/2, -sqrt(2)/2);
+	REQUIRE(expected == inverse * p);
+}
+
+TEST_CASE("rotating a point around the y axis")
+{
+	auto p = four_tuple::point(0, 0, 1);
+	auto half_quarter = matrix::rotation_y(M_PI_4);
+	auto full_quarter = matrix::rotation_y(M_PI_2);
+	auto expected = four_tuple::point(sqrt(2)/2, 0, sqrt(2)/2);
+	REQUIRE(expected == half_quarter * p);
+	expected = four_tuple::point(1, 0, 0);
+	REQUIRE(expected == full_quarter * p);
+}
+
+TEST_CASE("rotating a point around the z axis")
+{
+	auto p = four_tuple::point(0, 1, 0);
+	auto half_quarter = matrix::rotation_z(M_PI_4);
+	auto full_quarter = matrix::rotation_z(M_PI_2);
+	auto expected = four_tuple::point(-sqrt(2)/2, sqrt(2)/2, 0);
+	REQUIRE(expected == half_quarter * p);
+	expected = four_tuple::point(-1, 0, 0);
+	REQUIRE(expected == full_quarter * p);
 }
