@@ -40,6 +40,17 @@ matrix::matrix(matrix && other)
 	, _elements { std::move(other._elements) }
 	{}
 
+matrix matrix::translation(float x, float y, float z)
+{
+	return std::move(matrix
+	{
+		1, 0, 0, x,
+		0, 1, 0, y,
+		0, 0, 1, z,
+		0, 0, 0, 1
+	});
+}
+
 matrix& matrix::operator=(matrix && other)
 {
 	if (this != &other)

@@ -518,3 +518,27 @@ TEST_CASE("multiplying a product by its inverse")
 	auto c = a * b;
 	REQUIRE(a == c * inverse_b);
 }
+
+TEST_CASE("multiplying by a translation matrix")
+{
+	auto transform = matrix::translation(5, -3, 2);
+	auto p = four_tuple::point(-3, 4, 5);
+	auto expected = four_tuple::point(2, 1, 7);
+	REQUIRE(expected == transform * p);
+}
+
+TEST_CASE("multiplying by the inverse of a translation matrix")
+{
+	auto transform = matrix::translation(5, -3, 2);
+	auto inverse = transform.getInverse();
+	auto p = four_tuple::point(-3, 4, 5);
+	auto expected = four_tuple::point(-8, 7, 3);
+	REQUIRE(expected == inverse * p);
+}
+
+TEST_CASE("translation does not affect vectors")
+{
+	auto transform = matrix::translation(5, -3, 2);
+	auto v = four_tuple::vector(-3, 4, 5);
+	REQUIRE(v == transform * v);
+}

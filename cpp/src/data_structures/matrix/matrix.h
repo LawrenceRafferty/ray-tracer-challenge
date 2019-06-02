@@ -15,6 +15,8 @@ public:
 	matrix(int rows, int columns, std::initializer_list<float> elements);
 	matrix(matrix && other);
 
+	static matrix translation(float x, float y, float z);
+
 	matrix & operator=(matrix && other);
 
 	bool operator==(const matrix & other) const;
