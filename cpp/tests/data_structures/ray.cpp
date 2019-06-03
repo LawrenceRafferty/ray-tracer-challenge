@@ -14,3 +14,16 @@ TEST_CASE("creating and querying a ray")
 	REQUIRE(origin == r.getOrigin());
 	REQUIRE(direction == r.getDirection());
 }
+
+TEST_CASE("computing a point from a distance")
+{
+	auto origin = four_tuple::point(2, 3, 4);
+	auto r = ray(origin, four_tuple::vector(1, 0, 0));
+	REQUIRE(origin == r.getPositionAt(0));
+	auto expected = four_tuple::point(3, 3, 4);
+	REQUIRE(expected == r.getPositionAt(1));
+	expected = four_tuple::point(1, 3, 4);
+	REQUIRE(expected == r.getPositionAt(-1));
+	expected = four_tuple::point(4.5, 3, 4);
+	REQUIRE(expected == r.getPositionAt(2.5));
+}

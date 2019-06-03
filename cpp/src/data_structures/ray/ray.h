@@ -11,6 +11,7 @@ public:
 
 	four_tuple getOrigin() const;
 	four_tuple getDirection() const;
+	four_tuple getPositionAt(float t) const;
 
 private:
 	four_tuple _origin;

@@ -10,4 +10,8 @@ namespace data_structures
 	four_tuple ray::getOrigin() const { return _origin; }
 
 	four_tuple ray::getDirection() const { return _direction; }
+
+	four_tuple ray::getPositionAt(float t) const {
+		return _origin + _direction * t;
+	}
 }
