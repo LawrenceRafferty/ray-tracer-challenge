@@ -6,6 +6,7 @@
 /cpp/tests/data_structures/canvas
 /cpp/tests/data_structures/color
 /cpp/tests/data_structures/four_tuple
+/cpp/tests/data_structures/intersections
 /cpp/tests/data_structures/matrix
 /cpp/tests/data_structures/ray
 /cpp/tests/image_formats/plain_ppm

@@ -1,5 +1,6 @@
 #include "./sphere.h"
 #include <cmath>
+#include "../../data_structures/four_tuple/four_tuple.h"
 #include"../../data_structures/ray/ray.h"
 
 using data_structures::four_tuple;
