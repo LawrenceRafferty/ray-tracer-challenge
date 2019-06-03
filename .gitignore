@@ -9,5 +9,6 @@
 /cpp/tests/data_structures/matrix
 /cpp/tests/data_structures/ray
 /cpp/tests/image_formats/plain_ppm
+/cpp/tests/shapes/sphere
 /cpp/src/exercises/clock_face/program
 /cpp/src/exercises/projectiles/program
