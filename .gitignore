@@ -7,6 +7,7 @@
 /cpp/tests/data_structures/color
 /cpp/tests/data_structures/four_tuple
 /cpp/tests/data_structures/matrix
+/cpp/tests/data_structures/ray
 /cpp/tests/image_formats/plain_ppm
 /cpp/src/exercises/clock_face/program
 /cpp/src/exercises/projectiles/program
