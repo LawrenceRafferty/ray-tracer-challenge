@@ -8,6 +8,7 @@
 
 using data_structures::intersection;
 using data_structures::intersections;
+using data_structures::ray;
 using shapes::sphere;
 
 TEST_CASE("an intersection encapsulates t and object")
@@ -27,4 +28,14 @@ TEST_CASE("aggregating intersections")
 	REQUIRE(2 == xs.size());
 	REQUIRE(1 == xs.at(0).getT());
 	REQUIRE(2 == xs.at(1).getT());
+}
+
+TEST_CASE("find sets the object on the intersection")
+{
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto s = std::make_shared<sphere>();
+	auto xs = intersections::find(s, r);
+	REQUIRE(2 == xs.size());
+	REQUIRE(s == xs.at(0).getObject());
+	REQUIRE(s == xs.at(1).getObject());
 }
