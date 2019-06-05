@@ -7,7 +7,7 @@ namespace data_structures
 		auto tValues = object->intersect(r);
 		auto tValuesWithTheirObject = std::vector<intersection>();
 		for (auto tValue : tValues)
-			tValuesWithTheirObject.push_back(intersection(tValue, object));
+			tValuesWithTheirObject.emplace_back(intersection(tValue, object));
 
 		return intersections { std::move(tValuesWithTheirObject) };
 	}
