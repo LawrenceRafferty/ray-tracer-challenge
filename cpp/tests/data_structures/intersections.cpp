@@ -39,3 +39,66 @@ TEST_CASE("find sets the object on the intersection")
 	REQUIRE(s == xs.at(0).getObject());
 	REQUIRE(s == xs.at(1).getObject());
 }
+
+TEST_CASE("a negative intersection is not a hit candidate")
+{
+	auto s = std::make_shared<sphere>();
+	auto i = intersection(-1, s);
+	REQUIRE(false == i.isHitCandidate());
+}
+
+TEST_CASE("an intersection at 0 is a hit candidate")
+{
+	auto s = std::make_shared<sphere>();
+	auto i = intersection(0, s);
+	REQUIRE(true == i.isHitCandidate());
+}
+
+TEST_CASE("a positve intersection is a hit candidate")
+{
+	auto s = std::make_shared<sphere>();
+	auto i = intersection(1, s);
+	REQUIRE(true == i.isHitCandidate());
+}
+
+TEST_CASE("the hit, when all intersections have positive t")
+{
+	auto s = std::make_shared<sphere>();
+	auto i1 = intersection(1, s);
+	auto i2 = intersection(2, s);
+	auto xs = intersections { i2, i1 };
+	auto i = xs.getHit();
+	REQUIRE(i1 == *i);
+}
+
+TEST_CASE("the hit, when some intersections have negative t")
+{
+	auto s = std::make_shared<sphere>();
+	auto i1 = intersection(-1, s);
+	auto i2 = intersection(1, s);
+	auto xs = intersections { i2, i1 };
+	auto i = xs.getHit();
+	REQUIRE(i2 == *i);
+}
+
+TEST_CASE("the hit, when all intersections have negative t")
+{
+	auto s = std::make_shared<sphere>();
+	auto i1 = intersection(-2, s);
+	auto i2 = intersection(-1, s);
+	auto xs = intersections { i2, i1 };
+	auto i = xs.getHit();
+	REQUIRE(nullptr == i);
+}
+
+TEST_CASE("the hit is always the lowest nonnegative intersection")
+{
+	auto s = std::make_shared<sphere>();
+	auto i1 = intersection(5, s);
+	auto i2 = intersection(7, s);
+	auto i3 = intersection(-3, s);
+	auto i4 = intersection(2, s);
+	auto xs = intersections { i1, i2, i3, i4 };
+	auto i = xs.getHit();
+	REQUIRE(i4 == *i);
+}
