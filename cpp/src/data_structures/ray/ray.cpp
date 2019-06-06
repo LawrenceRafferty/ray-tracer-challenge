@@ -1,5 +1,7 @@
 #include "./ray.h"
 
+using data_structures::matrix;
+
 namespace data_structures
 {
 	ray::ray(four_tuple origin, four_tuple direction)
@@ -13,5 +15,12 @@ namespace data_structures
 
 	four_tuple ray::getPositionAt(float t) const {
 		return _origin + _direction * t;
+	}
+
+	ray ray::getTransformed(const matrix & transformation) const
+	{
+		auto transformedOrigin = transformation * _origin;
+		auto transformedDirection = transformation * _direction;
+		return std::move(ray(transformedOrigin, transformedDirection));
 	}
 }

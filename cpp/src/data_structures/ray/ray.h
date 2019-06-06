@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../four_tuple/four_tuple.h"
+#include "../matrix/matrix.h"
 
 namespace data_structures
 {
@@ -12,6 +13,8 @@ public:
 	four_tuple getOrigin() const;
 	four_tuple getDirection() const;
 	four_tuple getPositionAt(float t) const;
+
+	ray getTransformed(const matrix & transformation) const;
 
 private:
 	four_tuple _origin;
