@@ -11,5 +11,6 @@
 /cpp/tests/data_structures/ray
 /cpp/tests/image_formats/plain_ppm
 /cpp/tests/shapes/sphere
+/cpp/src/exercises/cast_rays_at_a_sphere/program
 /cpp/src/exercises/clock_face/program
 /cpp/src/exercises/projectiles/program
