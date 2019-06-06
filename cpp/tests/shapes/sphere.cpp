@@ -2,9 +2,11 @@
 #include "../framework/catch.hpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
 #include "../../src/data_structures/ray/ray.cpp"
+#include "../../src/data_structures/matrix/matrix.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 
 using data_structures::four_tuple;
+using data_structures::matrix;
 using data_structures::ray;
 using shapes::sphere;
 
@@ -54,4 +56,45 @@ TEST_CASE("a sphere is behind a ray")
 	REQUIRE(2 == xs.size());
 	REQUIRE(-6.0 == xs.at(0));
 	REQUIRE(-4.0 == xs.at(1));
+}
+
+TEST_CASE("a sphere's default transformation")
+{
+	auto s = sphere();
+	auto identity = matrix
+	{
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+	REQUIRE(identity == s.getTransform());
+}
+
+TEST_CASE("changing a sphere's transformation")
+{
+	auto s = sphere();
+	auto t = matrix::translation(2, 3, 4);
+	s.setTransform(t);
+	REQUIRE(t == s.getTransform());
+}
+
+TEST_CASE("intersecting a scaled sphere with a ray")
+{
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto s = sphere();
+	s.setTransform(matrix::scaling(2, 2, 2));
+	auto xs = s.intersect(r);
+	REQUIRE(2 == xs.size());
+	REQUIRE(3 == xs.at(0));
+	REQUIRE(7 == xs.at(1));
+}
+
+TEST_CASE("intersecting a translated sphere with a ray")
+{
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto s = sphere();
+	s.setTransform(matrix::translation(5, 0, 0));
+	auto xs = s.intersect(r);
+	REQUIRE(0 == xs.size());
 }

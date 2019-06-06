@@ -34,7 +34,13 @@ matrix::matrix(int rows, int columns, std::initializer_list<float> elements)
 			throw std::invalid_argument("Must provide exactly enough elements to fill the specified rows and columns.");
 	}
 
-matrix::matrix(matrix && other)
+matrix::matrix(const matrix & other)
+	: _rows { other._rows }
+	, _columns { other._columns }
+	, _elements { other._elements }
+	{}
+
+matrix::matrix(const matrix && other)
 	: _rows { other._rows }
 	, _columns { other._columns }
 	, _elements { std::move(other._elements) }
@@ -147,7 +153,19 @@ matrix matrix::getTranslated(float x, float y, float z) const
 	return std::move(transform * *this);
 }
 
-matrix& matrix::operator=(matrix && other)
+matrix& matrix::operator=(const matrix & other)
+{
+	if (this != &other)
+	{
+		_rows = other._rows;
+		_columns = other._columns;
+		_elements = other._elements;
+	}
+
+	return *this;
+}
+
+matrix& matrix::operator=(const matrix && other)
 {
 	if (this != &other)
 	{

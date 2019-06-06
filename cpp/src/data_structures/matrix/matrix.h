@@ -13,7 +13,8 @@ public:
 	matrix(int rows, int columns);
 	matrix(std::initializer_list<float> elements);
 	matrix(int rows, int columns, std::initializer_list<float> elements);
-	matrix(matrix && other);
+	matrix(const matrix & other);
+	matrix(const matrix && other);
 
 	static matrix rotation_x(float radians);
 	static matrix rotation_y(float radians);
@@ -22,7 +23,8 @@ public:
 	static matrix shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 	static matrix translation(float x, float y, float z);
 
-	matrix & operator=(matrix && other);
+	matrix & operator=(const matrix & other);
+	matrix & operator=(const matrix && other);
 
 	bool operator==(const matrix & other) const;
 	bool operator!=(const matrix & other) const;
