@@ -54,7 +54,7 @@ int main()
 
 	float sphereZ = -20;
 	auto s = std::make_shared<sphere>();
-	s->setTransform(matrix::scaling(20, 20, 20).getTranslated(width / 2, height / 2, sphereZ));
+	s->setTransform(matrix::scaling(20, 20, 20).getSheared(1, 1, 0, 0, 0, 0).getTranslated(width / 2, height / 2, sphereZ));
 
 	for (int multiplier = 1; multiplier <= 7; multiplier++)
 		castRays(c, s, sphereZ, multiplier);
