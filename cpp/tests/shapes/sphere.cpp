@@ -98,3 +98,49 @@ TEST_CASE("intersecting a translated sphere with a ray")
 	auto xs = s.intersect(r);
 	REQUIRE(0 == xs.size());
 }
+
+TEST_CASE("the normal on a sphere at a point on the x axis")
+{
+	auto s = sphere();
+	auto n = s.getNormalAtPoint(four_tuple::point(1, 0, 0));
+	REQUIRE(four_tuple::vector(1, 0, 0) == n);
+}
+
+TEST_CASE("the normal on a sphere at a point on the y axis")
+{
+	auto s = sphere();
+	auto n = s.getNormalAtPoint(four_tuple::point(0, 1, 0));
+	REQUIRE(four_tuple::vector(0, 1, 0) == n);
+}
+
+TEST_CASE("the normal on a sphere at a point on the z axis")
+{
+	auto s = sphere();
+	auto n = s.getNormalAtPoint(four_tuple::point(0, 0, 1));
+	REQUIRE(four_tuple::vector(0, 0, 1) == n);
+}
+
+TEST_CASE("the normal on a sphere at a nonaxial point")
+{
+	auto s = sphere();
+	auto sqrt3Over3 = sqrt(3) / 3.0;
+	auto n = s.getNormalAtPoint(four_tuple::point(sqrt3Over3, sqrt3Over3, sqrt3Over3));
+	REQUIRE(four_tuple::vector(sqrt3Over3, sqrt3Over3, sqrt3Over3) == n);
+}
+
+TEST_CASE("the normal is a normalized vector")
+{
+	auto s = sphere();
+	auto sqrt3Over3 = sqrt(3) / 3.0;
+	auto n = s.getNormalAtPoint(four_tuple::point(sqrt3Over3, sqrt3Over3, sqrt3Over3));
+	REQUIRE(n.getNormalized() == n);
+}
+
+TEST_CASE("computing the normal on a transformed sphere")
+{
+	auto s = sphere();
+	auto m = matrix::scaling(1, 0.5, 1) * matrix::rotation_z(M_PI / 5.0);
+	s.setTransform(m);
+	auto n = s.getNormalAtPoint(four_tuple::point(0, sqrt(2) / 2.0, -sqrt(2) / 2.0));
+	REQUIRE(four_tuple::vector(0, 0.97014, -0.24254) == n);
+}
