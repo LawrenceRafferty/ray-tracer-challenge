@@ -29,6 +29,7 @@ public:
 
 	float getMagnitude() const;
 	four_tuple getNormalized() const;
+	four_tuple getReflected(const four_tuple & normal) const;
 
 	float dot(const four_tuple & other) const;
 	four_tuple cross(const four_tuple & other) const;

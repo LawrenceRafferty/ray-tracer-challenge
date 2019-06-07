@@ -89,4 +89,9 @@ four_tuple four_tuple::getNormalized() const
 	auto magnitude = getMagnitude();
 	return *this / magnitude;
 }
+
+four_tuple four_tuple::getReflected(const four_tuple & normal) const
+{
+	return *this - normal * 2 * this->dot(normal);
+}
 } // namespace data_structures
