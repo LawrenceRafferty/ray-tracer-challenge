@@ -152,3 +152,12 @@ TEST_CASE("a sphere has a default material")
 	auto s = sphere();
 	REQUIRE(material() == s.getMaterial());
 }
+
+TEST_CASE("a sphere may be assigned a material")
+{
+	auto s = sphere();
+	auto m = material();
+	m.setAmbient(1.0f);
+	s.setMaterial(m);
+	REQUIRE(m == s.getMaterial());
+}

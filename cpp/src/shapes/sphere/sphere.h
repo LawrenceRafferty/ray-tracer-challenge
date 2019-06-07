@@ -14,6 +14,7 @@ public:
 	sphere();
 
 	const data_structures::material & getMaterial() const;
+	void setMaterial(const data_structures::material & material);
 
 	const data_structures::matrix & getTransform() const;
 	void setTransform(const data_structures::matrix & transform);

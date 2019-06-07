@@ -12,10 +12,19 @@ material::material()
 	{}
 
 const color & material::getColor() const { return _color; }
+void material::setColor(const color & color) { _color = color; }
+
 float material::getAmbient() const { return _ambient; }
+void material::setAmbient(float ambient) { _ambient = ambient; }
+
 float material::getDiffuse() const { return _diffuse; }
+void material::setDiffuse(float diffuse) { _diffuse = diffuse; }
+
 float material::getSpecular() const { return _specular; }
+void material::setSpecular(float specular) { _specular = specular; }
+
 float material::getShininess() const { return _shininess; }
+void material::setShininess(float shininess) { _shininess = shininess; } 
 
 bool material::operator==(const material & other) const
 {
