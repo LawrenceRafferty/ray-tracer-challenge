@@ -1,7 +1,9 @@
 #define CATCH_CONFIG_MAIN
 #include "../framework/catch.hpp"
+#include "../../src/data_structures/color/color.cpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
 #include "../../src/data_structures/ray/ray.cpp"
+#include "../../src/data_structures/material/material.cpp"
 #include "../../src/data_structures/matrix/matrix.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 
@@ -143,4 +145,10 @@ TEST_CASE("computing the normal on a transformed sphere")
 	s.setTransform(m);
 	auto n = s.getNormalAtPoint(four_tuple::point(0, sqrt(2) / 2.0, -sqrt(2) / 2.0));
 	REQUIRE(four_tuple::vector(0, 0.97014, -0.24254) == n);
+}
+
+TEST_CASE("a sphere has a default material")
+{
+	auto s = sphere();
+	REQUIRE(material() == s.getMaterial());
 }

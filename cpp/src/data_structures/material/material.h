@@ -15,6 +15,9 @@ public:
 	float getSpecular() const;
 	float getShininess() const;
 
+	bool operator==(const material & other) const;
+	bool operator!=(const material & other) const;
+
 private:
 	color _color;
 	float _ambient;

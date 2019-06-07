@@ -1,4 +1,5 @@
 #include "./material.h"
+#include "../float_utility.cpp"
 
 namespace data_structures
 {
@@ -15,4 +16,18 @@ float material::getAmbient() const { return _ambient; }
 float material::getDiffuse() const { return _diffuse; }
 float material::getSpecular() const { return _specular; }
 float material::getShininess() const { return _shininess; }
+
+bool material::operator==(const material & other) const
+{
+	return _color == other._color &&
+		float_utility::are_equivalent(_ambient, other._ambient) &&
+		float_utility::are_equivalent(_diffuse, other._diffuse) &&
+		float_utility::are_equivalent(_specular, other._specular) &&
+		float_utility::are_equivalent(_shininess, other._shininess);
+}
+
+bool material::operator!=(const material & other) const
+{
+	return !(*this == other);
+}
 } // namespace data_structures
