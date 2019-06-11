@@ -13,6 +13,9 @@ public:
 	const data_structures::four_tuple & getPosition() const;
 	const data_structures::color & getIntensity() const;
 
+	bool operator==(const point_light & other) const;
+	bool operator!=(const point_light & other) const;
+
 private:
 	data_structures::four_tuple _position;
 	data_structures::color _intensity;

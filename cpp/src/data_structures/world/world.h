@@ -12,7 +12,10 @@ public:
 	world();
 
 	const std::vector<lights::point_light> & getLights() const;
+	void addLight(const lights::point_light & light);
+
 	const std::vector<shapes::sphere> & getObjects() const;
+	void addObject(const shapes::sphere & object);
 
 private:
 	std::vector<lights::point_light> _lights;

@@ -68,4 +68,15 @@ std::vector<float> sphere::intersect(const ray & r) const
 	return std::move(doIntersect(transformed));
 }
 
+bool sphere::operator==(const sphere & other) const
+{
+	return _material == other._material &&
+		_transform == other._transform;
+}
+
+bool sphere::operator!=(const sphere & other) const
+{
+	return !(*this == other);
+}
+
 } // namespace shapes

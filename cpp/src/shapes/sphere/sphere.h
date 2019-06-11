@@ -23,6 +23,9 @@ public:
 
 	std::vector<float> intersect(const data_structures::ray & r) const;
 
+	bool operator==(const sphere & other) const;
+	bool operator!=(const sphere & other) const;
+
 private:
 	data_structures::material _material;
 	data_structures::matrix _transform;

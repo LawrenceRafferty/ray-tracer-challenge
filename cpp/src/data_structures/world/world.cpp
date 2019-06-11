@@ -12,6 +12,16 @@ world::world()
 
 const std::vector<lights::point_light> & world::getLights() const { return _lights; }
 
+void world::addLight(const point_light & light)
+{
+	_lights.emplace_back(light);
+}
+
 const std::vector<shapes::sphere> & world::getObjects() const { return _objects; }
+
+void world::addObject(const sphere & object)
+{
+	_objects.emplace_back(object);
+}
 
 } // namespace data_structures
