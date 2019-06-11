@@ -10,6 +10,7 @@
 /cpp/tests/data_structures/material
 /cpp/tests/data_structures/matrix
 /cpp/tests/data_structures/ray
+/cpp/tests/data_structures/world
 /cpp/tests/image_formats/plain_ppm
 /cpp/tests/lights/lights
 /cpp/tests/shapes/sphere
