@@ -3,6 +3,7 @@
 #include <vector>
 #include "../../shapes/sphere/sphere.h"
 #include "../intersection/intersection.h"
+#include "../world/world.h"
 
 namespace data_structures
 {
@@ -10,6 +11,7 @@ class intersections
 {
 public:
 	static intersections find(std::shared_ptr<const shapes::sphere> object, const ray & r);
+	static intersections find(const data_structures::world & w, const ray & r);
 
 	intersections(std::vector<intersection> intersections);
 	intersections(std::initializer_list<intersection> intersections);

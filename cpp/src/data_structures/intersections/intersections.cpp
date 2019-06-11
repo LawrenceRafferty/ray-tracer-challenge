@@ -1,5 +1,6 @@
 #include "./intersections.h"
 
+using data_structures::world;
 using shapes::sphere;
 
 namespace data_structures
@@ -11,6 +12,20 @@ intersections intersections::find(std::shared_ptr<const sphere> object, const ra
 	for (auto tValue : tValues)
 		tValuesWithTheirObject.emplace_back(intersection(tValue, object));
 
+	return intersections { std::move(tValuesWithTheirObject) };
+}
+
+intersections intersections::find(const world & w, const ray & r)
+{
+	auto tValuesWithTheirObject = std::vector<intersection>();
+	for (auto object : w.getObjects())
+	{
+		auto tValues = object->intersect(r);
+		for (auto tValue : tValues)
+			tValuesWithTheirObject.emplace_back(intersection(tValue, object));
+	}
+
+	std::sort(tValuesWithTheirObject.begin(), tValuesWithTheirObject.end());
 	return intersections { std::move(tValuesWithTheirObject) };
 }
 
