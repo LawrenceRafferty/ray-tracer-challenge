@@ -17,6 +17,7 @@ public:
 	const four_tuple & getPoint() const;
 	const four_tuple & getEyeVector() const;
 	const four_tuple & getNormalVector() const;;
+	bool getIsInside() const;
 
 private:
 	intersection_computations(
@@ -24,12 +25,14 @@ private:
 		std::shared_ptr<const shapes::sphere> object,
 		const four_tuple & point,
 		const four_tuple & eyeVector,
-		const four_tuple & normalVector);
+		const four_tuple & normalVector,
+		bool isInside);
 
 	float _t;
 	std::shared_ptr<const shapes::sphere> _object;
 	four_tuple _point;
 	four_tuple _eyeVector;
 	four_tuple _normalVector;
+	bool _isInside;
 };
 } // namespace data_structures

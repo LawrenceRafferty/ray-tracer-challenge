@@ -121,3 +121,24 @@ TEST_CASE("precomputing the state of an intersection")
 	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getEyeVector());
 	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getNormalVector());
 }
+
+TEST_CASE("the hit, when an intersection occurs on the outside")
+{
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto shape = std::make_shared<sphere>();
+	auto i = intersection(4, shape);
+	auto computations = intersection_computations::prepare(i, r);
+	REQUIRE(false == computations.getIsInside());
+}
+
+TEST_CASE("the hit, when an intersection occurs on the inside")
+{
+	auto r = ray(four_tuple::point(0, 0, 0), four_tuple::vector(0, 0, 1));
+	auto shape = std::make_shared<sphere>();
+	auto i = intersection(1, shape);
+	auto computations = intersection_computations::prepare(i, r);
+	REQUIRE(four_tuple::point(0, 0, 1) == computations.getPoint());
+	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getEyeVector());
+	REQUIRE(true == computations.getIsInside());
+	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getNormalVector());
+}

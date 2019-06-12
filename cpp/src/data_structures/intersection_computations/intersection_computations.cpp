@@ -11,12 +11,14 @@ namespace data_structures
 		std::shared_ptr<const sphere> object,
 		const four_tuple & point,
 		const four_tuple & eyeVector,
-		const four_tuple & normalVector)
+		const four_tuple & normalVector,
+		bool isInside)
 		: _t { t }
 		, _object { object }
 		, _point { point }
 		, _eyeVector { eyeVector }
 		, _normalVector { normalVector }
+		, _isInside { isInside }
 		{}
 
 	const intersection_computations & intersection_computations::prepare(const intersection & i, const ray & r)
@@ -26,12 +28,14 @@ namespace data_structures
 		auto point = r.getPositionAt(t);
 		auto eyeVector = -r.getDirection();
 		auto normalVector = object->getNormalAtPoint(point);
+		auto isInside = normalVector.dot(eyeVector) < 0;
 		return std::move(intersection_computations(
 			t,
 			object,
 			point,
 			eyeVector,
-			normalVector
+			isInside ? -normalVector : normalVector,
+			isInside
 		));
 	}
 
@@ -44,4 +48,6 @@ namespace data_structures
 	const four_tuple & intersection_computations::getEyeVector() const { return _eyeVector; }
 
 	const four_tuple & intersection_computations::getNormalVector() const { return _normalVector; }
+
+	bool intersection_computations::getIsInside() const { return _isInside; }
 }
