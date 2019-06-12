@@ -1,10 +1,7 @@
 #pragma once
 
+#include "./lighting.h"
 #include <cmath>
-#include "../data_structures/color/color.h"
-#include "../data_structures/four_tuple/four_tuple.h"
-#include "../data_structures/material/material.h"
-#include "./point_light/point_light.h"
 
 using data_structures::color;
 using data_structures::four_tuple;

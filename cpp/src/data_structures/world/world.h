@@ -3,6 +3,8 @@
 #include <vector>
 #include "../../lights/point_light/point_light.h"
 #include "../../shapes/sphere/sphere.h"
+#include "../color/color.h"
+#include "../intersection_computations/intersection_computations.h"
 
 namespace data_structures
 {
@@ -16,6 +18,8 @@ public:
 
 	const std::vector<std::shared_ptr<shapes::sphere>> & getObjects() const;
 	void addObject(std::shared_ptr<shapes::sphere> object);
+
+	color shadeHit(const intersection_computations & computations) const;
 
 private:
 	std::vector<lights::point_light> _lights;

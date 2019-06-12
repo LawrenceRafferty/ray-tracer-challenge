@@ -3,16 +3,19 @@
 #include "../../src/data_structures/color/color.cpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
 #include "../../src/data_structures/intersection/intersection.cpp"
+#include "../../src/data_structures/intersection_computations/intersection_computations.cpp"
 #include "../../src/data_structures/intersections/intersections.cpp"
 #include "../../src/data_structures/material/material.cpp"
 #include "../../src/data_structures/matrix/matrix.cpp"
 #include "../../src/data_structures/ray/ray.cpp"
 #include "../../src/data_structures/world/world.cpp"
+#include "../../src/lights/lighting.cpp"
 #include "../../src/lights/point_light/point_light.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 
 using data_structures::color;
 using data_structures::four_tuple;
+using data_structures::intersection_computations;
 using data_structures::intersections;
 using data_structures::material;
 using data_structures::world;
@@ -90,4 +93,29 @@ TEST_CASE("intersect a world with a ray")
 	REQUIRE(4.5 == xs.at(1).getT());
 	REQUIRE(5.5 == xs.at(2).getT());
 	REQUIRE(6 == xs.at(3).getT());
+}
+
+TEST_CASE("shading an intersection")
+{
+	auto w = getDefaultWorld();
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto shape = w.getObjects().at(0);
+	auto i = intersection(4, shape);
+	auto computations = intersection_computations::prepare(i, r);
+	auto c = w.shadeHit(computations);
+	REQUIRE(color(0.38066f, 0.47583f, 0.2855f) == c);
+}
+
+TEST_CASE("shading an intersection from the inside")
+{
+	auto w = world();
+	w.addLight(point_light(four_tuple::point(0, 0.25, 0), color(1, 1, 1)));
+	w.addObject(getDefaultWorldSphere1());
+	w.addObject(getDefaultWorldSphere2());
+	auto r = ray(four_tuple::point(0, 0, 0), four_tuple::vector(0, 0, 1));
+	auto shape = w.getObjects().at(1);
+	auto i = intersection(0.5, shape);
+	auto computations = intersection_computations::prepare(i, r);
+	auto c = w.shadeHit(computations);
+	REQUIRE(color(0.90498f, 0.90498f, 0.90498f) == c);
 }
