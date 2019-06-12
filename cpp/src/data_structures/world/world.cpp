@@ -1,6 +1,8 @@
 #include "./world.h"
 #include "../../lights/lighting.h"
+#include "../intersections/intersections.h"
 
+using data_structures::intersections;
 using lights::lighting;
 using lights::point_light;
 using shapes::sphere;
@@ -49,5 +51,16 @@ color world::shadeHit(const intersection_computations & computations) const
 	}
 	return combined;
 }
+
+	color world::getColorAt(const ray & r) const
+	{
+		auto intersections = intersections::find(*this, r);
+		auto hit = intersections.getHit();
+		if (hit == nullptr)
+			return color();
+
+		auto computations = intersection_computations::prepare(*hit, r);
+		return shadeHit(computations);
+	}
 
 } // namespace data_structures

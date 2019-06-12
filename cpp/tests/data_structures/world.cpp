@@ -119,3 +119,36 @@ TEST_CASE("shading an intersection from the inside")
 	auto c = w.shadeHit(computations);
 	REQUIRE(color(0.90498f, 0.90498f, 0.90498f) == c);
 }
+
+TEST_CASE("the color when a ray misses")
+{
+	auto w = getDefaultWorld();
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 1, 0));
+	auto c = w.getColorAt(r);
+	REQUIRE(color() == c);
+}
+
+TEST_CASE("the color when a ray hits")
+{
+	auto w = getDefaultWorld();
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto c = w.getColorAt(r);
+	REQUIRE(color(0.38066f, 0.47583f, 0.2855f) == c);
+}
+
+TEST_CASE("the color with an intersection behind the ray")
+{
+	auto w = getDefaultWorld();
+	auto outer = w.getObjects().at(0);
+	auto outerMaterial = material(outer->getMaterial());
+	outerMaterial.setAmbient(1);
+	outer->setMaterial(outerMaterial);
+	auto inner = w.getObjects().at(1);
+	auto innerMaterial = material(inner->getMaterial());
+	innerMaterial.setAmbient(1);
+	inner->setMaterial(innerMaterial);
+	auto r = ray(four_tuple::point(0, 0, 0.75), four_tuple::vector(0, 0, -1));
+	auto c = w.getColorAt(r);
+	auto expected = innerMaterial.getColor();
+	REQUIRE(expected == c);
+}

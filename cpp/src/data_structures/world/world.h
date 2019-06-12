@@ -21,6 +21,8 @@ public:
 
 	color shadeHit(const intersection_computations & computations) const;
 
+	color getColorAt(const ray & r) const;
+
 private:
 	std::vector<lights::point_light> _lights;
 	std::vector<std::shared_ptr<shapes::sphere>> _objects;
