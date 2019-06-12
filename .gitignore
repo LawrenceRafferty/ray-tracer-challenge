@@ -14,6 +14,7 @@
 /cpp/tests/image_formats/plain_ppm
 /cpp/tests/lights/lights
 /cpp/tests/shapes/sphere
+/cpp/tests/transformations/transformations
 /cpp/src/exercises/cast_rays_at_a_sphere/program
 /cpp/src/exercises/clock_face/program
 /cpp/src/exercises/projectiles/program
