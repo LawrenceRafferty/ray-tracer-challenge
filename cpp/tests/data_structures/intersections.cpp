@@ -1,12 +1,18 @@
 #define CATCH_CONFIG_MAIN
 #include "../framework/catch.hpp"
+#include "../../src/data_structures/color/color.cpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
 #include "../../src/data_structures/intersection/intersection.cpp"
+#include "../../src/data_structures/intersection_computations/intersection_computations.cpp"
 #include "../../src/data_structures/intersections/intersections.cpp"
+#include "../../src/data_structures/material/material.cpp"
+#include "../../src/data_structures/matrix/matrix.cpp"
 #include "../../src/data_structures/ray/ray.cpp"
+#include "../../src/data_structures/world/world.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 
 using data_structures::intersection;
+using data_structures::intersection_computations;
 using data_structures::intersections;
 using data_structures::ray;
 using shapes::sphere;
@@ -101,4 +107,17 @@ TEST_CASE("the hit is always the lowest nonnegative intersection")
 	auto xs = intersections { i1, i2, i3, i4 };
 	auto i = xs.getHit();
 	REQUIRE(i4 == *i);
+}
+
+TEST_CASE("precomputing the state of an intersection")
+{
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto shape = std::make_shared<sphere>();
+	auto i = intersection(4, shape);
+	auto computations = intersection_computations::prepare(i, r);
+	REQUIRE(i.getT() == computations.getT());
+	REQUIRE(i.getObject() == computations.getObject());
+	REQUIRE(four_tuple::point(0, 0, -1) == computations.getPoint());
+	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getEyeVector());
+	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getNormalVector());
 }
