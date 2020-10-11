@@ -12,6 +12,7 @@
 #include "../../src/lights/lighting.cpp"
 #include "../../src/lights/point_light/point_light.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
+#include "./default_world.cpp"
 
 using data_structures::color;
 using data_structures::four_tuple;
@@ -20,38 +21,6 @@ using data_structures::intersections;
 using data_structures::material;
 using data_structures::world;
 using lights::point_light;
-
-point_light getDefaultWorldLight()
-{
-	return std::move(point_light(four_tuple::point(-10, 10, -10), color(1, 1, 1)));
-}
-
-std::shared_ptr<sphere> getDefaultWorldSphere1()
-{
-	auto s1 = std::make_shared<sphere>();
-	auto m = material();
-	m.setColor(color(0.8, 1.0, 0.6));
-	m.setDiffuse(0.7);
-	m.setSpecular(0.2);
-	s1->setMaterial(m);
-	return s1;
-}
-
-std::shared_ptr<sphere> getDefaultWorldSphere2()
-{
-	auto s2 = std::make_shared<sphere>();
-	s2->setTransform(matrix::scaling(0.5, 0.5, 0.5));
-	return s2;
-}
-
-world getDefaultWorld()
-{
-	auto defaultWorld = world();
-	defaultWorld.addLight(getDefaultWorldLight());
-	defaultWorld.addObject(getDefaultWorldSphere1());
-	defaultWorld.addObject(getDefaultWorldSphere2());
-	return std::move(defaultWorld);
-}
 
 bool worldContainsLight(const world & w, const point_light & l)
 {
@@ -74,10 +43,10 @@ TEST_CASE("creating a world")
 
 TEST_CASE("the default world")
 {
-	auto defaultWorld = getDefaultWorld();
-	auto light = getDefaultWorldLight();
-	auto s1 = getDefaultWorldSphere1();
-	auto s2 = getDefaultWorldSphere2();
+	auto defaultWorld = default_world::getDefaultWorld();
+	auto light = default_world::getDefaultWorldLight();
+	auto s1 = default_world::getDefaultWorldSphere1();
+	auto s2 = default_world::getDefaultWorldSphere2();
 	REQUIRE(true == worldContainsLight(defaultWorld, light));
 	REQUIRE(true == worldContainsObject(defaultWorld, s1));
 	REQUIRE(true == worldContainsObject(defaultWorld, s2));
@@ -85,7 +54,7 @@ TEST_CASE("the default world")
 
 TEST_CASE("intersect a world with a ray")
 {
-	auto w = getDefaultWorld();
+	auto w = default_world::getDefaultWorld();
 	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
 	auto xs = intersections::find(w, r);
 	REQUIRE(4 == xs.size());
@@ -97,7 +66,7 @@ TEST_CASE("intersect a world with a ray")
 
 TEST_CASE("shading an intersection")
 {
-	auto w = getDefaultWorld();
+	auto w = default_world::getDefaultWorld();
 	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
 	auto shape = w.getObjects().at(0);
 	auto i = intersection(4, shape);
@@ -110,8 +79,8 @@ TEST_CASE("shading an intersection from the inside")
 {
 	auto w = world();
 	w.addLight(point_light(four_tuple::point(0, 0.25, 0), color(1, 1, 1)));
-	w.addObject(getDefaultWorldSphere1());
-	w.addObject(getDefaultWorldSphere2());
+	w.addObject(default_world::getDefaultWorldSphere1());
+	w.addObject(default_world::getDefaultWorldSphere2());
 	auto r = ray(four_tuple::point(0, 0, 0), four_tuple::vector(0, 0, 1));
 	auto shape = w.getObjects().at(1);
 	auto i = intersection(0.5, shape);
@@ -122,7 +91,7 @@ TEST_CASE("shading an intersection from the inside")
 
 TEST_CASE("the color when a ray misses")
 {
-	auto w = getDefaultWorld();
+	auto w = default_world::getDefaultWorld();
 	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 1, 0));
 	auto c = w.getColorAt(r);
 	REQUIRE(color() == c);
@@ -130,7 +99,7 @@ TEST_CASE("the color when a ray misses")
 
 TEST_CASE("the color when a ray hits")
 {
-	auto w = getDefaultWorld();
+	auto w = default_world::getDefaultWorld();
 	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
 	auto c = w.getColorAt(r);
 	REQUIRE(color(0.38066f, 0.47583f, 0.2855f) == c);
@@ -138,7 +107,7 @@ TEST_CASE("the color when a ray hits")
 
 TEST_CASE("the color with an intersection behind the ray")
 {
-	auto w = getDefaultWorld();
+	auto w = default_world::getDefaultWorld();
 	auto outer = w.getObjects().at(0);
 	auto outerMaterial = material(outer->getMaterial());
 	outerMaterial.setAmbient(1);

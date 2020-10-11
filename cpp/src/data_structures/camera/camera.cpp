@@ -48,11 +48,26 @@ namespace data_structures
 
 		// using the camera matrix, transform the canvas point and the origin,
 		// and then compute the ray's direction vector
-		// (remember that hte canvas is at z=-1)
+		// (remember that the canvas is at z=-1)
 		auto inverseTransform = _transform.getInverse();
 		auto pixel = inverseTransform * four_tuple::point(worldX, worldY, -1);
 		auto origin = inverseTransform * four_tuple::point(0, 0, 0);
 		auto direction = (pixel - origin).getNormalized();
-		return ray(origin, direction);
+		return std::move(ray(origin, direction));
+	}
+
+	canvas camera::render(world world) const {
+		auto image = canvas(_hsize, _vsize);
+		for (int y = 0; y <= _vsize - 1; y++)
+		{
+			for (int x = 0; x <= _hsize - 1; x++)
+			{
+				auto ray = getRayForPixel(x, y);
+				auto color = world.getColorAt(ray);
+				image.setPixelAt(x, y, color);
+			}
+		}
+
+		return std::move(image);
 	}
 } // namespace camera

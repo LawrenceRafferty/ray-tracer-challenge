@@ -1,7 +1,9 @@
 #pragma once
 
+#include "../canvas/canvas.h"
 #include "../matrix/matrix.h"
 #include "../ray/ray.h"
+#include "../world/world.h"
 
 namespace data_structures
 {
@@ -19,6 +21,7 @@ double getPixelSize() { return _pixelSize; }
 matrix getTransform() { return _transform; }
 
 ray getRayForPixel(int x, int y) const;
+canvas render(world world) const;
 
 private:
 	int _hsize;
