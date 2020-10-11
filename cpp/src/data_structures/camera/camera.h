@@ -1,12 +1,14 @@
 #pragma once
 
 #include "../matrix/matrix.h"
+#include "../ray/ray.h"
 
 namespace data_structures
 {
 class camera
 {
-public: camera(int hsize, int vsize, double fieldOfView);
+public:
+	camera(int hsize, int vsize, double fieldOfView, matrix transform);
 
 int getHsize() { return _hsize; }
 int getVsize() { return _vsize; }
@@ -15,6 +17,8 @@ double getHalfWidth() { return _halfWidth; }
 double getHalfHeight() { return _halfHeight; }
 double getPixelSize() { return _pixelSize; }
 matrix getTransform() { return _transform; }
+
+ray getRayForPixel(int x, int y) const;
 
 private:
 	int _hsize;
