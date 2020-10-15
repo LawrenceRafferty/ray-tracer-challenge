@@ -19,8 +19,8 @@ namespace data_structures
 		_fieldOfView { fieldOfView },
 		_transform { transform }
 	{
-		auto halfView = tan(fieldOfView / 2);
-		auto aspect = hsize / vsize;
+		double halfView = tan(fieldOfView / 2);
+		double aspect = hsize / static_cast<double>(vsize);
 		if (aspect >= 1.0)
 		{
 			_halfWidth = halfView;
@@ -38,13 +38,13 @@ namespace data_structures
 
 	ray camera::getRayForPixel(int x, int y) const {
 		// the offset from the edge of the canvas to the pixel's center
-		auto xOffset = (x + 0.5) * _pixelSize;
-		auto yOffset = (y + 0.5) * _pixelSize;
+		double xOffset = (x + 0.5) * _pixelSize;
+		double yOffset = (y + 0.5) * _pixelSize;
 
 		// the untransformed coordinates of the pixel in world space
 		// (remember that the camera looks toward -z, so +x is to the *left*)
-		auto worldX = _halfWidth - xOffset;
-		auto worldY = _halfHeight - yOffset;
+		double worldX = _halfWidth - xOffset;
+		double worldY = _halfHeight - yOffset;
 
 		// using the camera matrix, transform the canvas point and the origin,
 		// and then compute the ray's direction vector
