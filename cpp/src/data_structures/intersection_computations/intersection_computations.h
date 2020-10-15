@@ -10,7 +10,7 @@ namespace data_structures
 class intersection_computations
 {
 public:
-	static const intersection_computations & prepare(const intersection & i, const ray & r);
+	static intersection_computations prepare(const intersection & i, const ray & r);
 
 	float getT() const;
 	std::shared_ptr<const shapes::sphere> getObject() const;
@@ -23,9 +23,9 @@ private:
 	intersection_computations(
 		float t,
 		std::shared_ptr<const shapes::sphere> object,
-		const four_tuple & point,
-		const four_tuple & eyeVector,
-		const four_tuple & normalVector,
+		four_tuple point,
+		four_tuple eyeVector,
+		four_tuple normalVector,
 		bool isInside);
 
 	float _t;

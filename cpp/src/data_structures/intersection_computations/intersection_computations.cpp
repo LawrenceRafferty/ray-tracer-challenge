@@ -9,19 +9,19 @@ namespace data_structures
 	intersection_computations::intersection_computations(
 		float t,
 		std::shared_ptr<const sphere> object,
-		const four_tuple & point,
-		const four_tuple & eyeVector,
-		const four_tuple & normalVector,
+		four_tuple point,
+		four_tuple eyeVector,
+		four_tuple normalVector,
 		bool isInside)
 		: _t { t }
 		, _object { object }
-		, _point { point }
-		, _eyeVector { eyeVector }
-		, _normalVector { normalVector }
+		, _point { std::move(point) }
+		, _eyeVector { std::move(eyeVector) }
+		, _normalVector { std::move(normalVector) }
 		, _isInside { isInside }
 		{}
 
-	const intersection_computations & intersection_computations::prepare(const intersection & i, const ray & r)
+	intersection_computations intersection_computations::prepare(const intersection & i, const ray & r)
 	{
 		float t = i.getT();
 		auto object = i.getObject();
