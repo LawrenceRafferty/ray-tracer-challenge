@@ -10,8 +10,8 @@ class ray
 public:
 	ray(four_tuple origin, four_tuple direction);
 
-	four_tuple getOrigin() const;
-	four_tuple getDirection() const;
+	const four_tuple & getOrigin() const;
+	const four_tuple & getDirection() const;
 	four_tuple getPositionAt(float t) const;
 
 	ray getTransformed(const matrix & transformation) const;

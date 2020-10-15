@@ -7,12 +7,12 @@ class four_tuple
 public:
 	static four_tuple point(float x, float y, float z)
 	{
-		return four_tuple(x, y, z, 1);
+		return std::move(four_tuple(x, y, z, 1));
 	}
 
 	static four_tuple vector(float x, float y, float z)
 	{
-		return four_tuple(x, y, z, 0);
+		return std::move(four_tuple(x, y, z, 0));
 	}
 
 	four_tuple(float x, float y, float z, float w)
