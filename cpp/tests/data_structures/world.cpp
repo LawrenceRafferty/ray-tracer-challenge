@@ -121,3 +121,35 @@ TEST_CASE("the color with an intersection behind the ray")
 	auto expected = innerMaterial.getColor();
 	REQUIRE(expected == c);
 }
+
+TEST_CASE("there is no shadow when nothing is collinear with point and light")
+{
+	auto w = default_world::getDefaultWorld();
+	auto p = four_tuple::point(0, 10, 0);
+	auto isShadowed = w.isShadowed(p);
+	REQUIRE(!isShadowed);
+}
+
+TEST_CASE("the shadow when an object is between the point and the light")
+{
+	auto w = default_world::getDefaultWorld();
+	auto p = four_tuple::point(10, -10, 10);
+	auto isShadowed = w.isShadowed(p);
+	REQUIRE(isShadowed);
+}
+
+TEST_CASE("there is no shadow when an object is behind the light")
+{
+	auto w = default_world::getDefaultWorld();
+	auto p = four_tuple::point(-20, 20, -20);
+	auto isShadowed = w.isShadowed(p);
+	REQUIRE(!isShadowed);
+}
+
+TEST_CASE("there is no shadow when an object is behind the point")
+{
+	auto w = default_world::getDefaultWorld();
+	auto p = four_tuple::point(-2, 2, -2);
+	auto isShadowed = w.isShadowed(p);
+	REQUIRE(!isShadowed);
+}

@@ -65,4 +65,27 @@ color world::shadeHit(const intersection_computations & computations) const
 		return shadeHit(computations);
 	}
 
+	bool world::isShadowed(const four_tuple & point) const
+	{
+		for (auto light : _lights)
+		{
+			auto isShadowed = world::isShadowed(light, point);
+			if (!isShadowed)
+				return false;
+		}
+
+		return true;
+	}
+
+	bool world::isShadowed(const point_light & light, const four_tuple & point) const
+	{
+		auto vectorFromPointToLightSource = light.getPosition() - point;
+		auto distanceToLightSource = vectorFromPointToLightSource.getMagnitude();
+		auto directionToLightSource = vectorFromPointToLightSource.getNormalized();
+		auto rayFromPointToLightSource = ray(point, directionToLightSource);
+		auto intersections = intersections::find(*this, rayFromPointToLightSource);
+		auto hit = intersections.getHit();
+		return hit != nullptr && hit->getT() < distanceToLightSource;
+	}
+
 } // namespace data_structures
