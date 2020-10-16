@@ -26,7 +26,7 @@ const material & sphere::getMaterial() const { return _material; }
 void sphere::setMaterial(const material & material) { _material = material; }
 
 const matrix & sphere::getTransform() const { return _transform; }
-void sphere::setTransform(const matrix & transform) { _transform = transform; }
+void sphere::setTransform(matrix && transform) { _transform = std::move(transform); }
 
 std::vector<float> doIntersect(const ray & r)
 {

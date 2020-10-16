@@ -17,7 +17,7 @@ public:
 	void setMaterial(const data_structures::material & material);
 
 	const data_structures::matrix & getTransform() const;
-	void setTransform(const data_structures::matrix & transform);
+	void setTransform(data_structures::matrix && transform);
 
 	data_structures::four_tuple getNormalAtPoint(const data_structures::four_tuple & p) const;
 
