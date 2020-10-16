@@ -29,7 +29,19 @@ TEST_CASE("lighting with the eye between the light and the surface")
 	auto eyev = four_tuple::vector(0, 0, -1);
 	auto normalv = four_tuple::vector(0, 0, -1);
 	auto light = point_light(four_tuple::point(0, 0, -10), color(1, 1, 1));
-	REQUIRE(color(1.9, 1.9, 1.9) == lighting(m, light, position, eyev, normalv));
+	auto isInShadow = false;
+	REQUIRE(color(1.9, 1.9, 1.9) == lighting(m, light, position, eyev, normalv, isInShadow));
+}
+
+TEST_CASE("lighting with the surface in shadow")
+{
+	auto m = material();
+	auto position = four_tuple::point(0, 0, 0);
+	auto eyev = four_tuple::vector(0, 0, -1);
+	auto normalv = four_tuple::vector(0, 0, -1);
+	auto light = point_light(four_tuple::point(0, 0, -10), color(1, 1, 1));
+	auto isInShadow = true;
+	REQUIRE(color(0.1, 0.1, 0.1) == lighting(m, light, position, eyev, normalv, isInShadow));
 }
 
 TEST_CASE("lighting with the eye between light and surface, eye offset 45°")
@@ -40,7 +52,8 @@ TEST_CASE("lighting with the eye between light and surface, eye offset 45°")
 	auto eyev = four_tuple::vector(0, sqrt2Over2, -sqrt2Over2);
 	auto normalv = four_tuple::vector(0, 0, -1);
 	auto light = point_light(four_tuple::point(0, 0, -10), color(1, 1, 1));
-	REQUIRE(color(1.0, 1.0, 1.0) == lighting(m, light, position, eyev, normalv));
+	auto isInShadow = false;
+	REQUIRE(color(1.0, 1.0, 1.0) == lighting(m, light, position, eyev, normalv, isInShadow));
 }
 
 TEST_CASE("lighting with the eye opposite surface, light offset 45°")
@@ -50,7 +63,8 @@ TEST_CASE("lighting with the eye opposite surface, light offset 45°")
 	auto eyev = four_tuple::vector(0, 0, -1);
 	auto normalv = four_tuple::vector(0, 0, -1);
 	auto light = point_light(four_tuple::point(0, 10, -10), color(1, 1, 1));
-	REQUIRE(color(0.7364, 0.7364, 0.7364) == lighting(m, light, position, eyev, normalv));
+	auto isInShadow = false;
+	REQUIRE(color(0.7364, 0.7364, 0.7364) == lighting(m, light, position, eyev, normalv, isInShadow));
 }
 
 TEST_CASE("lighting with the eye in the path of the reflection vector")
@@ -61,7 +75,8 @@ TEST_CASE("lighting with the eye in the path of the reflection vector")
 	auto eyev = four_tuple::vector(0, -sqrt2Over2, -sqrt2Over2);
 	auto normalv = four_tuple::vector(0, 0, -1);
 	auto light = point_light(four_tuple::point(0, 10, -10), color(1, 1, 1));
-	auto actual = lighting(m, light, position, eyev, normalv);
+	auto isInShadow = false;
+	auto actual = lighting(m, light, position, eyev, normalv, isInShadow);
 	REQUIRE(color(1.63638, 1.63638, 1.63638) == actual);
 }
 
@@ -72,5 +87,6 @@ TEST_CASE("lighting with the light behind the surface")
 	auto eyev = four_tuple::vector(0, 0, -1);
 	auto normalv = four_tuple::vector(0, 0, -1);
 	auto light = point_light(four_tuple::point(0, 0, 10), color(1, 1, 1));
-	REQUIRE(color(0.1, 0.1, 0.1) == lighting(m, light, position, eyev, normalv));
+	auto isInShadow = false;
+	REQUIRE(color(0.1, 0.1, 0.1) == lighting(m, light, position, eyev, normalv, isInShadow));
 }

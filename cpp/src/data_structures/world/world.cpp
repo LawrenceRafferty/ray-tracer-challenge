@@ -30,12 +30,14 @@ void world::addObject(std::shared_ptr<sphere> object)
 
 color shadeHitWithSingleLight(const point_light & light, const intersection_computations & computations)
 {
+	auto isInShadow = false;
 	return lighting(
 		computations.getObject()->getMaterial(),
 		light,
 		computations.getPoint(),
 		computations.getEyeVector(),
-		computations.getNormalVector());
+		computations.getNormalVector(),
+		isInShadow);
 }
 
 color world::shadeHit(const intersection_computations & computations) const

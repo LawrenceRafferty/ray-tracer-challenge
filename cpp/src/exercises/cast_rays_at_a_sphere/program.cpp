@@ -46,7 +46,8 @@ void castRays(canvas & c, std::shared_ptr<sphere> s)
 				auto point = r.getPositionAt(hit->getT());
 				auto normal = hit->getObject()->getNormalAtPoint(point);
 				auto eye = -r.getDirection();
-				auto pixelColor = lighting(hit->getObject()->getMaterial(), light, point, eye, normal);
+				auto isInShadow = false;
+				auto pixelColor = lighting(hit->getObject()->getMaterial(), light, point, eye, normal, false);
 				c.setPixelAt(x, y, pixelColor);
 			}
 		}

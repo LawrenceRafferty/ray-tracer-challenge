@@ -9,10 +9,19 @@ using data_structures::material;
 
 namespace lights
 {
-color lighting(const material & material, const point_light & light, const four_tuple & point, const four_tuple & eyev, const four_tuple & normalv)
+color lighting(
+	const material & material,
+	const point_light & light,
+	const four_tuple & point,
+	const four_tuple & eyev,
+	const four_tuple & normalv,
+	bool isInShadow)
 {
 	auto effectiveColor = material.getColor() * light.getIntensity();
 	color ambient = effectiveColor * material.getAmbient();
+	if (isInShadow)
+		return std::move(ambient);
+
 	color diffuse;
 	color specular;
 
@@ -40,6 +49,6 @@ color lighting(const material & material, const point_light & light, const four_
 		}
 	}
 
-	return ambient + diffuse + specular;
+	return std::move(ambient + diffuse + specular);
 }
 } // namespace lights
