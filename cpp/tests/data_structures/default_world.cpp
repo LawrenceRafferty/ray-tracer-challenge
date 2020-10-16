@@ -8,7 +8,7 @@ namespace default_world
 {
 lights::point_light getDefaultWorldLight()
 {
-	return std::move(lights::point_light(data_structures::four_tuple::point(-10, 10, -10), data_structures::color(1, 1, 1)));
+	return lights::point_light(data_structures::four_tuple::point(-10, 10, -10), data_structures::color(1, 1, 1));
 }
 
 std::shared_ptr<shapes::sphere> getDefaultWorldSphere1()
@@ -35,6 +35,6 @@ data_structures::world getDefaultWorld()
 	defaultWorld.addLight(getDefaultWorldLight());
 	defaultWorld.addObject(getDefaultWorldSphere1());
 	defaultWorld.addObject(getDefaultWorldSphere2());
-	return std::move(defaultWorld);
+	return defaultWorld;
 }
 }

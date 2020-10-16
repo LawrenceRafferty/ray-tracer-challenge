@@ -14,13 +14,13 @@ namespace data_structures
 	const four_tuple & ray::getDirection() const { return _direction; }
 
 	four_tuple ray::getPositionAt(float t) const {
-		return std::move(_origin + _direction * t);
+		return _origin + _direction * t;
 	}
 
 	ray ray::getTransformed(const matrix & transformation) const
 	{
 		auto transformedOrigin = transformation * _origin;
 		auto transformedDirection = transformation * _direction;
-		return std::move(ray(transformedOrigin, transformedDirection));
+		return ray(transformedOrigin, transformedDirection);
 	}
 }

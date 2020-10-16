@@ -65,7 +65,7 @@ data_structures::four_tuple sphere::getNormalAtPoint(const data_structures::four
 std::vector<float> sphere::intersect(const ray & r) const
 {
 	auto transformed = r.getTransformed(_transform.getInverse());
-	return std::move(doIntersect(transformed));
+	return doIntersect(transformed);
 }
 
 bool sphere::operator==(const sphere & other) const

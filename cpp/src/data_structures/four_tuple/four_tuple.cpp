@@ -15,10 +15,10 @@ float four_tuple::dot(const four_tuple & other) const
 four_tuple four_tuple::cross(const four_tuple & other) const
 {
 	// ASSUME: operating on vectors (w == 0)
-	return std::move(vector(
+	return vector(
 		_y * other._z - _z * other._y,
 		_z * other._x - _x * other._z,
-		_x * other._y - _y * other._x));
+		_x * other._y - _y * other._x);
 }
 
 bool four_tuple::operator==(const four_tuple & other) const
@@ -36,47 +36,47 @@ bool four_tuple::operator!=(const four_tuple & other) const
 
 four_tuple four_tuple::operator+(const four_tuple & other) const
 {
-	return std::move(four_tuple(
+	return four_tuple(
 		_x + other._x,
 		_y + other._y,
 		_z + other._z,
-		_w + other._w));
+		_w + other._w);
 }
 
 four_tuple four_tuple::operator-(const four_tuple & other) const
 {
-	return std::move(four_tuple(
+	return four_tuple(
 		_x - other._x,
 		_y - other._y,
 		_z - other._z,
-		_w - other._w));
+		_w - other._w);
 }
 
 four_tuple four_tuple::operator-() const
 {
-	return std::move(four_tuple(
+	return four_tuple(
 		-_x,
 		-_y,
 		-_z,
-		-_w));
+		-_w);
 }
 
 four_tuple four_tuple::operator*(float scalar) const
 {
-	return std::move(four_tuple(
+	return four_tuple(
 		_x * scalar,
 		_y * scalar,
 		_z * scalar,
-		_w * scalar));
+		_w * scalar);
 }
 
 four_tuple four_tuple::operator/(float scalar) const
 {
-	return std::move(four_tuple(
+	return four_tuple(
 		_x / scalar,
 		_y / scalar,
 		_z / scalar,
-		_w / scalar));
+		_w / scalar);
 }
 
 float four_tuple::getMagnitude() const
@@ -87,11 +87,11 @@ float four_tuple::getMagnitude() const
 four_tuple four_tuple::getNormalized() const
 {
 	auto magnitude = getMagnitude();
-	return std::move(*this / magnitude);
+	return *this / magnitude;
 }
 
 four_tuple four_tuple::getReflected(const four_tuple & normal) const
 {
-	return std::move(*this - normal * 2 * this->dot(normal));
+	return *this - normal * 2 * this->dot(normal);
 }
 } // namespace data_structures

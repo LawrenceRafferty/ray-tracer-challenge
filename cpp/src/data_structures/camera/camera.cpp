@@ -53,7 +53,7 @@ namespace data_structures
 		auto pixel = inverseTransform * four_tuple::point(worldX, worldY, -1);
 		auto origin = inverseTransform * four_tuple::point(0, 0, 0);
 		auto direction = (pixel - origin).getNormalized();
-		return std::move(ray(origin, direction));
+		return ray(origin, direction);
 	}
 
 	canvas camera::render(world world) const {
@@ -68,6 +68,6 @@ namespace data_structures
 			}
 		}
 
-		return std::move(image);
+		return image;
 	}
 } // namespace camera

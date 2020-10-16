@@ -50,107 +50,107 @@ matrix matrix::rotation_x(float radians)
 {
 	auto c = cos(radians);
 	auto s = sin(radians);
-	return std::move(matrix
+	return matrix
 	{
 		1, 0, 0, 0,
 		0, c, -s, 0,
 		0, s, c, 0,
 		0, 0, 0, 1
-	});
+	};
 }
 
 matrix matrix::rotation_y(float radians)
 {
 	auto c = cos(radians);
 	auto s = sin(radians);
-	return std::move(matrix
+	return matrix
 	{
 		c, 0, s, 0,
 		0, 1, 0, 0,
 		-s, 0, c, 0,
 		0, 0, 0, 1
-	});
+	};
 }
 
 matrix matrix::rotation_z(float radians)
 {
 	auto c = cos(radians);
 	auto s = sin(radians);
-	return std::move(matrix
+	return matrix
 	{
 		c, -s, 0, 0,
 		s, c, 0, 0,
 		0, 0, 1, 0,
 		0, 0, 0, 1
-	});
+	};
 }
 
 matrix matrix::scaling(float x, float y, float z)
 {
-	return std::move(matrix
+	return matrix
 	{
 		x, 0, 0, 0,
 		0, y, 0, 0,
 		0, 0, z, 0,
 		0, 0, 0, 1
-	});
+	};
 }
 
 matrix matrix::shearing(float xy, float xz, float yx, float yz, float zx, float zy)
 {
-	return std::move(matrix
+	return matrix
 	{
 		1, xy, xz, 0,
 		yx, 1, yz, 0,
 		zx, zy, 1, 0,
 		0, 0, 0, 1
-	});
+	};
 }
 
 matrix matrix::translation(float x, float y, float z)
 {
-	return std::move(matrix
+	return matrix
 	{
 		1, 0, 0, x,
 		0, 1, 0, y,
 		0, 0, 1, z,
 		0, 0, 0, 1
-	});
+	};
 }
 
 matrix matrix::getRotated_x(float radians) const
 {
 	auto transform = matrix::rotation_x(radians);
-	return std::move(transform * *this);
+	return transform * *this;
 }
 
 matrix matrix::getRotated_y(float radians) const
 {
 	auto transform = matrix::rotation_y(radians);
-	return std::move(transform * *this);
+	return transform * *this;
 }
 
 matrix matrix::getRotated_z(float radians) const
 {
 	auto transform = matrix::rotation_z(radians);
-	return std::move(transform * *this);
+	return transform * *this;
 }
 
 matrix matrix::getScaled(float x, float y, float z) const {
 	auto transform = matrix::scaling(x, y, z);
-	return std::move(transform * *this);
+	return transform * *this;
 }
 
 matrix matrix::getSheared(float xy, float xz, float yx, float yz, float zx, float zy) const
 {
 	auto transform = matrix::shearing(xy, xz, yx, yz, zx, zy);
-	return std::move(transform * *this);
+	return transform * *this;
 }
 
 matrix matrix::getTranslated(float x, float y, float z) const
 {
 	auto transform = matrix::translation(x, y, z);
-	return std::move(transform * *this);
+	return transform * *this;
 }
 
 matrix& matrix::operator=(const matrix & other)
@@ -207,7 +207,7 @@ matrix matrix::operator*(const matrix & other) const
 		}
 	}
 
-	return std::move(m);
+	return m;
 }
 
 four_tuple matrix::operator*(const four_tuple & t) const
@@ -291,7 +291,7 @@ matrix matrix::getSubmatrix(int removedRow, int removedColumn) const
 		newRow++;
 	}
 
-	return std::move(s);
+	return s;
 }
 
 matrix matrix::getTransposed() const
@@ -302,7 +302,7 @@ matrix matrix::getTransposed() const
 		for (int column = 0; column < _columns; column++)
 			m.setElementAt(column, row, getElementAt(row, column));
 	}
-	return std::move(m);
+	return m;
 }
 
 bool matrix::isInvertible() const
@@ -331,7 +331,7 @@ matrix matrix::getInverse() const
 		}
 	}
 
-	return std::move(inverse);
+	return inverse;
 }
 
 float matrix::getElementAt(int row, int column) const

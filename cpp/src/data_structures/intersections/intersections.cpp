@@ -50,6 +50,6 @@ std::unique_ptr<const intersection> intersections::getHit() const
 			hit = std::make_unique<intersection>(i);
 	}
 
-	return std::move(hit);
+	return hit;
 }
 } // namespace data_structures
