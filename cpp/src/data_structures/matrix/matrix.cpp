@@ -40,7 +40,7 @@ matrix::matrix(const matrix & other)
 	, _elements { other._elements }
 	{}
 
-matrix::matrix(const matrix && other)
+matrix::matrix(matrix && other)
 	: _rows { other._rows }
 	, _columns { other._columns }
 	, _elements { std::move(other._elements) }
@@ -165,7 +165,7 @@ matrix& matrix::operator=(const matrix & other)
 	return *this;
 }
 
-matrix& matrix::operator=(const matrix && other)
+matrix& matrix::operator=(matrix && other)
 {
 	if (this != &other)
 	{

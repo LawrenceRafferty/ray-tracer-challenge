@@ -14,7 +14,7 @@ public:
 	matrix(std::initializer_list<float> elements);
 	matrix(int rows, int columns, std::initializer_list<float> elements);
 	matrix(const matrix & other);
-	matrix(const matrix && other);
+	matrix(matrix && other);
 
 	static matrix rotation_x(float radians);
 	static matrix rotation_y(float radians);
@@ -24,7 +24,7 @@ public:
 	static matrix translation(float x, float y, float z);
 
 	matrix & operator=(const matrix & other);
-	matrix & operator=(const matrix && other);
+	matrix & operator=(matrix && other);
 
 	bool operator==(const matrix & other) const;
 	bool operator!=(const matrix & other) const;
