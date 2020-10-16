@@ -144,3 +144,14 @@ TEST_CASE("the hit, when an intersection occurs on the inside")
 	REQUIRE(true == computations.getIsInside());
 	REQUIRE(four_tuple::vector(0, 0, -1) == computations.getNormalVector());
 }
+
+TEST_CASE("the hit should offset the point")
+{
+	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
+	auto shape = std::make_shared<sphere>();
+	shape->setTransform(matrix::translation(0, 0, 1));
+	auto i = intersection(5, shape);
+	auto computations = intersection_computations::prepare(i, r);
+	REQUIRE(computations.getOverPoint().getZ() < -data_structures::float_utility::EPSILON / 2.0f);
+	REQUIRE(computations.getPoint().getZ() > computations.getOverPoint().getZ());
+}

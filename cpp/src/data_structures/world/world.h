@@ -23,10 +23,12 @@ public:
 
 	color getColorAt(const ray & r) const;
 
-	bool isShadowed(const four_tuple & point) const;
+	bool getIsShadowed(const four_tuple & point) const;
 
 private:
-	bool isShadowed(const lights::point_light & light, const four_tuple & point) const;
+	color shadeHitWithSingleLight(const lights::point_light & light, const intersection_computations & computations) const;
+
+	bool getIsShadowed(const lights::point_light & light, const four_tuple & point) const;
 
 	std::vector<lights::point_light> _lights;
 	std::vector<std::shared_ptr<shapes::sphere>> _objects;

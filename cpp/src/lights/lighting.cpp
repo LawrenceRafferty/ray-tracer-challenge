@@ -15,12 +15,12 @@ color lighting(
 	const four_tuple & point,
 	const four_tuple & eyev,
 	const four_tuple & normalv,
-	bool isInShadow)
+	bool isShadowed)
 {
 	auto effectiveColor = material.getColor() * light.getIntensity();
 	color ambient = effectiveColor * material.getAmbient();
-	if (isInShadow)
-		return std::move(ambient);
+	if (isShadowed)
+		return ambient;
 
 	color diffuse;
 	color specular;
@@ -49,6 +49,6 @@ color lighting(
 		}
 	}
 
-	return std::move(ambient + diffuse + specular);
+	return ambient + diffuse + specular;
 }
 } // namespace lights

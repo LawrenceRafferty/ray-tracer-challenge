@@ -28,16 +28,16 @@ void world::addObject(std::shared_ptr<sphere> object)
 	_objects.emplace_back(object);
 }
 
-color shadeHitWithSingleLight(const point_light & light, const intersection_computations & computations)
+color world::shadeHitWithSingleLight(const point_light & light, const intersection_computations & computations) const
 {
-	auto isInShadow = false;
+	auto isShadowed = this->getIsShadowed(light, computations.getOverPoint());
 	return lighting(
 		computations.getObject()->getMaterial(),
 		light,
-		computations.getPoint(),
+		computations.getOverPoint(),
 		computations.getEyeVector(),
 		computations.getNormalVector(),
-		isInShadow);
+		isShadowed);
 }
 
 color world::shadeHit(const intersection_computations & computations) const
@@ -65,11 +65,11 @@ color world::shadeHit(const intersection_computations & computations) const
 		return shadeHit(computations);
 	}
 
-	bool world::isShadowed(const four_tuple & point) const
+	bool world::getIsShadowed(const four_tuple & point) const
 	{
 		for (auto light : _lights)
 		{
-			auto isShadowed = world::isShadowed(light, point);
+			auto isShadowed = world::getIsShadowed(light, point);
 			if (!isShadowed)
 				return false;
 		}
@@ -77,7 +77,7 @@ color world::shadeHit(const intersection_computations & computations) const
 		return true;
 	}
 
-	bool world::isShadowed(const point_light & light, const four_tuple & point) const
+	bool world::getIsShadowed(const point_light & light, const four_tuple & point) const
 	{
 		auto vectorFromPointToLightSource = light.getPosition() - point;
 		auto distanceToLightSource = vectorFromPointToLightSource.getMagnitude();

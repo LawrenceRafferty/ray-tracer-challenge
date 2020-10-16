@@ -89,6 +89,22 @@ TEST_CASE("shading an intersection from the inside")
 	REQUIRE(color(0.90498f, 0.90498f, 0.90498f) == c);
 }
 
+TEST_CASE("shadeHit is given an intersection in shadow")
+{
+	auto w = world();
+	w.addLight(point_light(four_tuple::point(0, 0, -10), color(1, 1, 1)));
+	auto s1 = std::make_shared<sphere>();
+	w.addObject(s1);
+	auto s2 = std::make_shared<sphere>();
+	s2->setTransform(matrix::translation(0, 0, 10));
+	w.addObject(s2);
+	auto r = ray(four_tuple::point(0, 0, 5), four_tuple::vector(0, 0, 1));
+	auto i = intersection(4, s2);
+	auto computations = intersection_computations::prepare(i, r);
+	auto c = w.shadeHit(computations);
+	REQUIRE(color(0.1, 0.1, 0.1) == c);
+}
+
 TEST_CASE("the color when a ray misses")
 {
 	auto w = default_world::getDefaultWorld();
@@ -126,7 +142,7 @@ TEST_CASE("there is no shadow when nothing is collinear with point and light")
 {
 	auto w = default_world::getDefaultWorld();
 	auto p = four_tuple::point(0, 10, 0);
-	auto isShadowed = w.isShadowed(p);
+	auto isShadowed = w.getIsShadowed(p);
 	REQUIRE(!isShadowed);
 }
 
@@ -134,7 +150,7 @@ TEST_CASE("the shadow when an object is between the point and the light")
 {
 	auto w = default_world::getDefaultWorld();
 	auto p = four_tuple::point(10, -10, 10);
-	auto isShadowed = w.isShadowed(p);
+	auto isShadowed = w.getIsShadowed(p);
 	REQUIRE(isShadowed);
 }
 
@@ -142,7 +158,7 @@ TEST_CASE("there is no shadow when an object is behind the light")
 {
 	auto w = default_world::getDefaultWorld();
 	auto p = four_tuple::point(-20, 20, -20);
-	auto isShadowed = w.isShadowed(p);
+	auto isShadowed = w.getIsShadowed(p);
 	REQUIRE(!isShadowed);
 }
 
@@ -150,6 +166,6 @@ TEST_CASE("there is no shadow when an object is behind the point")
 {
 	auto w = default_world::getDefaultWorld();
 	auto p = four_tuple::point(-2, 2, -2);
-	auto isShadowed = w.isShadowed(p);
+	auto isShadowed = w.getIsShadowed(p);
 	REQUIRE(!isShadowed);
 }

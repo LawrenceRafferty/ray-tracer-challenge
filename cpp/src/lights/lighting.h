@@ -13,5 +13,5 @@ namespace lights
 		const data_structures::four_tuple & point,
 		const data_structures::four_tuple & eyev,
 		const data_structures::four_tuple & normalv,
-		bool isInShadow);
+		bool isShadowed);
 }

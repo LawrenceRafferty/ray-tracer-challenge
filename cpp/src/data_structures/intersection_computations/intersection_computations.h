@@ -15,6 +15,7 @@ public:
 	float getT() const;
 	std::shared_ptr<const shapes::sphere> getObject() const;
 	const four_tuple & getPoint() const;
+	const four_tuple & getOverPoint() const;
 	const four_tuple & getEyeVector() const;
 	const four_tuple & getNormalVector() const;;
 	bool getIsInside() const;
@@ -24,6 +25,7 @@ private:
 		float t,
 		std::shared_ptr<const shapes::sphere> object,
 		four_tuple point,
+		four_tuple overPoint,
 		four_tuple eyeVector,
 		four_tuple normalVector,
 		bool isInside);
@@ -31,6 +33,7 @@ private:
 	float _t;
 	std::shared_ptr<const shapes::sphere> _object;
 	four_tuple _point;
+	four_tuple _overPoint;
 	four_tuple _eyeVector;
 	four_tuple _normalVector;
 	bool _isInside;
