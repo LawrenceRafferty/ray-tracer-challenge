@@ -155,25 +155,17 @@ matrix matrix::getTranslated(float x, float y, float z) const
 
 matrix& matrix::operator=(const matrix & other)
 {
-	if (this != &other)
-	{
-		_rows = other._rows;
-		_columns = other._columns;
-		_elements = other._elements;
-	}
-
+	_rows = other._rows;
+	_columns = other._columns;
+	_elements = other._elements;
 	return *this;
 }
 
 matrix& matrix::operator=(matrix && other)
 {
-	if (this != &other)
-	{
-		_rows = other._rows;
-		_columns = other._columns;
-		_elements = std::move(other._elements);
-	}
-
+	_rows = other._rows;
+	_columns = other._columns;
+	_elements = std::move(other._elements);
 	return *this;
 }
 
