@@ -2,37 +2,17 @@
 #include <cmath>
 
 using data_structures::four_tuple;
-using data_structures::material;
-using data_structures::matrix;
 using data_structures::ray;
 
 namespace shapes
 {
-sphere::sphere()
-	: _material { material() }
-	, _transform
-	{
-		matrix
-		{
-			1, 0, 0, 0,
-			0, 1, 0, 0,
-			0, 0, 1, 0,
-			0, 0, 0, 1
-		}
-	}
-	{}
+sphere::sphere() : shape() {}
 
-const material & sphere::getMaterial() const { return _material; }
-void sphere::setMaterial(const material & material) { _material = material; }
-
-const matrix & sphere::getTransform() const { return _transform; }
-void sphere::setTransform(matrix && transform) { _transform = std::move(transform); }
-
-std::vector<float> doIntersect(const ray & r)
+std::vector<float> sphere::localIntersect(const ray & localRay) const
 {
 	// ASSUME: the sphere is centered at the world origin
-	auto vectorFromSphereCenterToRayOrigin = r.getOrigin() - four_tuple::point(0, 0, 0);
-	auto rayDirection = r.getDirection();
+	auto vectorFromSphereCenterToRayOrigin = localRay.getOrigin() - four_tuple::point(0, 0, 0);
+	auto rayDirection = localRay.getDirection();
 	float a = rayDirection.dot(rayDirection);
 	float b = 2 * rayDirection.dot(vectorFromSphereCenterToRayOrigin);
 	float c = vectorFromSphereCenterToRayOrigin.dot(vectorFromSphereCenterToRayOrigin) - 1;
@@ -47,31 +27,16 @@ std::vector<float> doIntersect(const ray & r)
 	return std::vector<float>{t1, t2};
 }
 
-data_structures::four_tuple sphere::getNormalAtPoint(const data_structures::four_tuple & p) const
+four_tuple sphere::getLocalNormalAtLocalPoint(const four_tuple & localPoint) const
 {
-	auto inverseTranform = _transform.getInverse();
-	auto objectPoint = inverseTranform * p;
-
-	// ASSUME: objectNormal is already normalized because this is a unit sphere centered at the origin
-	auto objectNormal = (objectPoint - four_tuple::point(0, 0, 0));
-	auto worldNormalWithWrongW = inverseTranform.getTransposed() * objectNormal;
-	auto worldNormal = four_tuple::vector(
-		worldNormalWithWrongW.getX(),
-		worldNormalWithWrongW.getY(),
-		worldNormalWithWrongW.getZ());
-	return worldNormal.getNormalized();
-}
-
-std::vector<float> sphere::intersect(const ray & r) const
-{
-	auto transformed = r.getTransformed(_transform.getInverse());
-	return doIntersect(transformed);
+	// ASSUME: already normalized because this is a unit sphere centered at the origin
+	return localPoint - four_tuple::point(0, 0, 0);
 }
 
 bool sphere::operator==(const sphere & other) const
 {
-	return _material == other._material &&
-		_transform == other._transform;
+	return getMaterial() == other.getMaterial() &&
+		getTransform() == other.getTransform();
 }
 
 bool sphere::operator!=(const sphere & other) const

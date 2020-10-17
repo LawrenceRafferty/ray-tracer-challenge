@@ -5,6 +5,7 @@
 #include "../../src/data_structures/ray/ray.cpp"
 #include "../../src/data_structures/material/material.cpp"
 #include "../../src/data_structures/matrix/matrix.cpp"
+#include "../../src/shapes/shape.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 
 using data_structures::four_tuple;

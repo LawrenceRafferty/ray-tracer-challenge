@@ -7,13 +7,10 @@
 
 namespace shapes
 {
-class sphere : public shape
+class test : public shape
 {
 public:
-	sphere();
-
-	bool operator==(const sphere & other) const;
-	bool operator!=(const sphere & other) const;
+	test();
 
 private:
 	data_structures::four_tuple getLocalNormalAtLocalPoint(const data_structures::four_tuple & localPoint) const;
