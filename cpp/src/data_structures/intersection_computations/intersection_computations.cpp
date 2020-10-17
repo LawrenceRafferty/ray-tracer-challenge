@@ -2,13 +2,13 @@
 
 using data_structures::intersection;
 using data_structures::ray;
-using shapes::sphere;
+using shapes::shape;
 
 namespace data_structures
 {
 	intersection_computations::intersection_computations(
 		float t,
-		std::shared_ptr<const sphere> object,
+		std::shared_ptr<const shape> object,
 		four_tuple point,
 		four_tuple overPoint,
 		four_tuple eyeVector,
@@ -48,7 +48,7 @@ namespace data_structures
 
 	float intersection_computations::getT() const { return _t; }
 
-	std::shared_ptr<const shapes::sphere> intersection_computations::getObject() const { return _object; }
+	std::shared_ptr<const shapes::shape> intersection_computations::getObject() const { return _object; }
 
 	const four_tuple & intersection_computations::getPoint() const { return _point; }
 

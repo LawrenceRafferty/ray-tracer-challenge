@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../shapes/sphere/sphere.h"
+#include "../../shapes/shape.h"
 #include "../four_tuple/four_tuple.h"
 #include "../intersection/intersection.h"
 #include "../ray/ray.h"
@@ -13,7 +13,7 @@ public:
 	static intersection_computations prepare(const intersection & i, const ray & r);
 
 	float getT() const;
-	std::shared_ptr<const shapes::sphere> getObject() const;
+	std::shared_ptr<const shapes::shape> getObject() const;
 	const four_tuple & getPoint() const;
 	const four_tuple & getOverPoint() const;
 	const four_tuple & getEyeVector() const;
@@ -23,7 +23,7 @@ public:
 private:
 	intersection_computations(
 		float t,
-		std::shared_ptr<const shapes::sphere> object,
+		std::shared_ptr<const shapes::shape> object,
 		four_tuple point,
 		four_tuple overPoint,
 		four_tuple eyeVector,
@@ -31,7 +31,7 @@ private:
 		bool isInside);
 
 	float _t;
-	std::shared_ptr<const shapes::sphere> _object;
+	std::shared_ptr<const shapes::shape> _object;
 	four_tuple _point;
 	four_tuple _overPoint;
 	four_tuple _eyeVector;

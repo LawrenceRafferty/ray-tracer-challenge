@@ -1,11 +1,11 @@
 #include "./intersections.h"
 
 using data_structures::world;
-using shapes::sphere;
+using shapes::shape;
 
 namespace data_structures
 {
-intersections intersections::find(std::shared_ptr<const sphere> object, const ray &r)
+intersections intersections::find(std::shared_ptr<const shape> object, const ray &r)
 {
 	auto tValues = object->intersect(r);
 	auto tValuesWithTheirObject = std::vector<intersection>();

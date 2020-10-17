@@ -1,16 +1,16 @@
 #pragma once
 
-#include "../../shapes/sphere/sphere.h"
+#include "../../shapes/shape.h"
 
 namespace data_structures
 {
 class intersection
 {
 public:
-	intersection(float t, std::shared_ptr<const shapes::sphere> object);
+	intersection(float t, std::shared_ptr<const shapes::shape> object);
 
 	float getT() const;
-	std::shared_ptr<const shapes::sphere> getObject() const;
+	std::shared_ptr<const shapes::shape> getObject() const;
 
 	bool operator==(const intersection & other) const;
 	bool operator!=(const intersection & other) const;
@@ -22,6 +22,6 @@ public:
 
 private:
 	float _t;
-	std::shared_ptr<const shapes::sphere> _object;
+	std::shared_ptr<const shapes::shape> _object;
 };
 } // namespace data_structures

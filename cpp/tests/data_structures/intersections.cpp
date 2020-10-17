@@ -11,6 +11,7 @@
 #include "../../src/data_structures/world/world.cpp"
 #include "../../src/lights/lighting.cpp"
 #include "../../src/lights/point_light/point_light.cpp"
+#include "../../src/shapes/shape.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 
 using data_structures::intersection;
