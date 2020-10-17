@@ -72,7 +72,7 @@ TEST_CASE("shading an intersection")
 	auto i = intersection(4, shape);
 	auto computations = intersection_computations::prepare(i, r);
 	auto c = w.shadeHit(computations);
-	REQUIRE(color(0.38066f, 0.47583f, 0.2855f) == c);
+	REQUIRE(color(0.38042f, 0.47552f, 0.28531f) == c);
 }
 
 TEST_CASE("shading an intersection from the inside")
@@ -86,7 +86,7 @@ TEST_CASE("shading an intersection from the inside")
 	auto i = intersection(0.5, shape);
 	auto computations = intersection_computations::prepare(i, r);
 	auto c = w.shadeHit(computations);
-	REQUIRE(color(0.90498f, 0.90498f, 0.90498f) == c);
+	REQUIRE(color(0.90168f, 0.90168f, 0.90168f) == c);
 }
 
 TEST_CASE("shadeHit is given an intersection in shadow")
@@ -118,7 +118,7 @@ TEST_CASE("the color when a ray hits")
 	auto w = default_world::getDefaultWorld();
 	auto r = ray(four_tuple::point(0, 0, -5), four_tuple::vector(0, 0, 1));
 	auto c = w.getColorAt(r);
-	REQUIRE(color(0.38066f, 0.47583f, 0.2855f) == c);
+	REQUIRE(color(0.38042f, 0.47552f, 0.28531f) == c);
 }
 
 TEST_CASE("the color with an intersection behind the ray")
