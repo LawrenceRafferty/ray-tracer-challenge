@@ -77,7 +77,7 @@ TEST_CASE("changing a sphere's transformation")
 {
 	auto s = sphere();
 	auto t = matrix::translation(2, 3, 4);
-	s.setTransform(t);
+	s.setTransform(std::move(t));
 	REQUIRE(t == s.getTransform());
 }
 
@@ -142,7 +142,7 @@ TEST_CASE("computing the normal on a transformed sphere")
 {
 	auto s = sphere();
 	auto m = matrix::scaling(1, 0.5, 1) * matrix::rotation_z(M_PI / 5.0);
-	s.setTransform(m);
+	s.setTransform(std::move(m));
 	auto n = s.getNormalAtPoint(four_tuple::point(0, sqrt(2) / 2.0, -sqrt(2) / 2.0));
 	REQUIRE(four_tuple::vector(0, 0.97014, -0.24254) == n);
 }
