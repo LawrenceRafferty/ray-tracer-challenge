@@ -11,6 +11,7 @@
 #include "../../src/data_structures/world/world.cpp"
 #include "../../src/lights/lighting.cpp"
 #include "../../src/lights/point_light/point_light.cpp"
+#include "../../src/shapes/shape.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 #include "./default_world.cpp"
 
@@ -21,6 +22,7 @@ using data_structures::intersections;
 using data_structures::material;
 using data_structures::world;
 using lights::point_light;
+using shapes::sphere;
 
 bool worldContainsLight(const world & w, const point_light & l)
 {
@@ -31,7 +33,7 @@ bool worldContainsLight(const world & w, const point_light & l)
 bool worldContainsObject(const world & w, std::shared_ptr<sphere> o)
 {
 	auto objects = w.getObjects();
-	return std::any_of(objects.begin(), objects.end(), [o](std::shared_ptr<sphere> candidate) { return *candidate == *o; });
+	return std::any_of(objects.begin(), objects.end(), [o](std::shared_ptr<shape> candidate) { return *std::static_pointer_cast<sphere>(candidate) == *o; });
 }
 
 TEST_CASE("creating a world")
