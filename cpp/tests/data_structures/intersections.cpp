@@ -152,6 +152,6 @@ TEST_CASE("the hit should offset the point")
 	shape->setTransform(matrix::translation(0, 0, 1));
 	auto i = intersection(5, shape);
 	auto computations = intersection_computations::prepare(i, r);
-	REQUIRE(computations.getOverPoint().getZ() < -data_structures::float_utility::EPSILON / 2.0f);
+	REQUIRE(computations.getOverPoint().getZ() < -float_utility::EPSILON / 2.0f);
 	REQUIRE(computations.getPoint().getZ() > computations.getOverPoint().getZ());
 }

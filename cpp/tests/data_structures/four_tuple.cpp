@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "../framework/catch.hpp"
 #include "../../src/data_structures/four_tuple/four_tuple.cpp"
-#include "../../src/data_structures/float_utility.cpp"
+#include "../../src/float_utility.cpp"
 
 data_structures::four_tuple point(float x, float y, float z)
 {
@@ -161,7 +161,7 @@ TEST_CASE("the magnitude of a normalized vector is 1")
 {
 	auto v = vector(1, 2, 3);
 	auto normalized = v.getNormalized();
-	REQUIRE(true == data_structures::float_utility::are_equivalent(1.0f, normalized.getMagnitude()));
+	REQUIRE(true == float_utility::are_equivalent(1.0f, normalized.getMagnitude()));
 }
 
 TEST_CASE("the dot product of two vectors")
