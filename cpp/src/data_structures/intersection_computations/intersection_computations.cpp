@@ -34,7 +34,7 @@ namespace data_structures
 		if (isInside)
 			normalVector = -normalVector;
 
-		auto overPoint = point + normalVector * float_utility::EPSILON;
+		auto overPoint = point + normalVector * 0.01f;
 		return intersection_computations(
 			t,
 			object,
