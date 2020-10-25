@@ -12,13 +12,13 @@ class camera
 public:
 	camera(int hsize, int vsize, double fieldOfView, matrix transform);
 
-	int getHsize() { return _hsize; }
-	int getVsize() { return _vsize; }
-	double getFieldOfView() { return _fieldOfView; }
-	double getHalfWidth() { return _halfWidth; }
-	double getHalfHeight() { return _halfHeight; }
-	double getPixelSize() { return _pixelSize; }
-	matrix getTransform() { return _transform; }
+	int getHsize() const { return _hsize; }
+	int getVsize() const { return _vsize; }
+	double getFieldOfView() const { return _fieldOfView; }
+	double getHalfWidth() const { return _halfWidth; }
+	double getHalfHeight() const { return _halfHeight; }
+	double getPixelSize() const { return _pixelSize; }
+	const matrix & getTransform() const { return _transform; }
 
 	ray getRayForPixel(int x, int y) const;
 	canvas render(world world) const;
