@@ -6,6 +6,7 @@
 #include "../../src/data_structures/material/material.cpp"
 #include "../../src/data_structures/matrix/matrix.cpp"
 #include "../../src/patterns/pattern.cpp"
+#include "../../src/patterns/solid/solid.cpp"
 #include "../../src/patterns/test/test.cpp"
 #include "../../src/shapes/shape.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
@@ -61,4 +62,11 @@ TEST_CASE("a pattern with both an object and a pattern transformation")
 	pattern.setTransform(std::move(matrix::translation(0.5, 1, 1.5)));
 	auto c = pattern.getColorOnObjectAtPoint(shape, four_tuple::point(2.5, 3, 3.5));
 	REQUIRE(color(0.75, 0.5, 0.25) == c);
+}
+
+TEST_CASE("a solid pattern has the same color everywhere")
+{
+	auto c = color(1, 2, 3);
+	auto solidPattern = patterns::solid(c);
+	REQUIRE(c == solidPattern.getColorAtPoint(four_tuple::point(123, 456, 789)));
 }
