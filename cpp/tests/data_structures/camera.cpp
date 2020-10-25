@@ -10,8 +10,10 @@
 #include "../../src/data_structures/matrix/matrix.cpp"
 #include "../../src/data_structures/ray/ray.cpp"
 #include "../../src/data_structures/world/world.cpp"
+#include "../../src/float_utility.cpp"
 #include "../../src/lights/lighting.cpp"
 #include "../../src/lights/point_light/point_light.cpp"
+#include "../../src/shapes/shape.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 #include "../../src/transformations/transformations.cpp"
 #include "./default_world.cpp"
@@ -42,13 +44,13 @@ TEST_CASE("constructing a camera")
 TEST_CASE("the pixel size for a horizontal canvas")
 {
 	auto c = camera(200, 125, M_PI_2);
-	REQUIRE(c.getPixelSize() == 0.01);
+	REQUIRE(float_utility::are_equivalent(c.getPixelSize(), 0.01));
 }
 
 TEST_CASE("the pixel size for a vertical canvas")
 {
 	auto c = camera(125, 200, M_PI_2);
-	REQUIRE(c.getPixelSize() == 0.01); 
+	REQUIRE(float_utility::are_equivalent(c.getPixelSize(), 0.01)); 
 }
 
 TEST_CASE("constructing a ray through the center of the canvas")
@@ -69,7 +71,7 @@ TEST_CASE("constructing a ray through a corner of the canvas")
 
 TEST_CASE("constructing a ray when the camera is transformed")
 {
-	auto c = camera(201, 101, M_PI_2, matrix::translation(0, -2, 5));
+	auto c = camera(201, 101, M_PI_2, matrix::translation(0, -2, 5).getRotated_y(M_PI_4));
 	auto r = c.getRayForPixel(100, 50);
 	REQUIRE(r.getOrigin() == four_tuple::point(0, 2, -5));
 	REQUIRE(r.getDirection() == four_tuple::vector(M_SQRT2 / 2, 0, -M_SQRT2 / 2));
@@ -82,7 +84,7 @@ TEST_CASE("rendering a world with a camera")
 	auto to = four_tuple::point(0, 1, 0);
 	auto up = four_tuple::vector(0, 1, 0);
 	auto viewTransform = transformations::getViewTransform(from, to, up);
-	auto c = camera(11, 11, M_PI_2, viewTransform);
+	auto c = camera(11, 11, M_PI_2, std::move(viewTransform));
 	auto image = c.render(w);
-	REQUIRE(image.getPixelAt(5, 5) == color(0.38066, 0.47583, 0.2855));
+	REQUIRE(image.getPixelAt(5, 5) == color(0.48778, 0.60973, 0.36583));
 }
