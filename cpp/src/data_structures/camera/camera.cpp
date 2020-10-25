@@ -17,7 +17,7 @@ namespace data_structures
 		: _hsize { hsize },
 		_vsize { vsize },
 		_fieldOfView { fieldOfView },
-		_transform { transform }
+		_transform { std::move(transform) }
 	{
 		double halfView = tan(fieldOfView / 2);
 		double aspect = hsize / static_cast<double>(vsize);
