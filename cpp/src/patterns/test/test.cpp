@@ -16,4 +16,9 @@ namespace patterns
 			patternSpacePoint.getY(),
 			patternSpacePoint.getZ());
 	}
+
+	bool test::equals(const pattern & other) const
+	{
+		return true;
+	}
 }

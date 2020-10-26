@@ -17,7 +17,7 @@ color lighting(
 	const four_tuple & normalv,
 	bool isShadowed)
 {
-	auto effectiveColor = material.getColor() * light.getIntensity();
+	auto effectiveColor = material.getPattern().getColorAtPoint(point) * light.getIntensity();
 	color ambient = effectiveColor * material.getAmbient();
 	if (isShadowed)
 		return ambient;

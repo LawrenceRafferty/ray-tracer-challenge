@@ -47,7 +47,8 @@ TEST_CASE("a pattern with an object transformation")
 	auto shape = sphere();
 	shape.setTransform(std::move(matrix::scaling(2, 2, 2)));
 	auto pattern = patterns::test();
-	auto c = pattern.getColorOnObjectAtPoint(shape, four_tuple::point(2, 3, 4));
+	auto shapeLocalPoint = shape.getLocalPoint(four_tuple::point(2, 3, 4));
+	auto c = pattern.getColorOnObjectAtPoint(shapeLocalPoint);
 	REQUIRE(color(1, 1.5, 2) == c);
 }
 
@@ -56,7 +57,8 @@ TEST_CASE("a pattern with a pattern transformation")
 	auto shape = sphere();
 	auto pattern = patterns::test();
 	pattern.setTransform(std::move(matrix::scaling(2, 2, 2)));
-	auto c = pattern.getColorOnObjectAtPoint(shape, four_tuple::point(2, 3, 4));
+	auto shapeLocalPoint = shape.getLocalPoint(four_tuple::point(2, 3, 4));
+	auto c = pattern.getColorOnObjectAtPoint(shapeLocalPoint);
 	REQUIRE(color(1, 1.5, 2) == c);
 }
 
@@ -66,7 +68,8 @@ TEST_CASE("a pattern with both an object and a pattern transformation")
 	shape.setTransform(std::move(matrix::scaling(2, 2, 2)));
 	auto pattern = patterns::test();
 	pattern.setTransform(std::move(matrix::translation(0.5, 1, 1.5)));
-	auto c = pattern.getColorOnObjectAtPoint(shape, four_tuple::point(2.5, 3, 3.5));
+	auto shapeLocalPoint = shape.getLocalPoint(four_tuple::point(2.5, 3, 3.5));
+	auto c = pattern.getColorOnObjectAtPoint(shapeLocalPoint);
 	REQUIRE(color(0.75, 0.5, 0.25) == c);
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../color/color.h"
+#include "../../patterns/pattern.h"
 
 namespace data_structures
 {
@@ -9,8 +9,8 @@ class material
 public:
 	material();
 
-	const color & getColor() const;
-	void setColor(const color & color);
+	const patterns::pattern & getPattern() const;
+	void setPattern(std::shared_ptr<patterns::pattern> pattern);
 
 	float getAmbient() const;
 	void setAmbient(float ambient);
@@ -28,7 +28,7 @@ public:
 	bool operator!=(const material & other) const;
 
 private:
-	color _color;
+	std::shared_ptr<patterns::pattern> _pattern;
 	float _ambient;
 	float _diffuse;
 	float _specular;

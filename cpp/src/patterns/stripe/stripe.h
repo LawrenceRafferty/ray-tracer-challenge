@@ -15,6 +15,8 @@ public:
 	data_structures::color getColorAtPoint(const data_structures::four_tuple &point) const;
 
 private:
+	bool equals(const pattern & other) const;
+
 	std::vector<std::shared_ptr<pattern>> _patterns;
 };
 } // namespace patterns

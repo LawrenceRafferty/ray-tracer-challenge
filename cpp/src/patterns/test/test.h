@@ -12,5 +12,8 @@ public:
 	test();
 
 	data_structures::color getColorAtPoint(const data_structures::four_tuple & patternSpacePoint) const;
+
+private:
+	bool equals(const pattern & other) const;
 };
 } // namespace patterns

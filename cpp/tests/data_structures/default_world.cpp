@@ -2,6 +2,7 @@
 #include "../../src/data_structures/four_tuple/four_tuple.h"
 #include "../../src/data_structures/world/world.h"
 #include "../../src/lights/point_light/point_light.h"
+#include "../../src/patterns/solid/solid.h"
 #include "../../src/shapes/sphere/sphere.h"
 
 namespace default_world
@@ -15,7 +16,7 @@ std::shared_ptr<shapes::sphere> getDefaultWorldSphere1()
 {
 	auto s1 = std::make_shared<shapes::sphere>();
 	auto m = data_structures::material();
-	m.setColor(data_structures::color(0.8, 1.0, 0.6));
+	m.setPattern(std::make_shared<patterns::solid>(color(0.8, 1.0, 0.6)));
 	m.setDiffuse(0.7);
 	m.setSpecular(0.2);
 	s1->setMaterial(m);

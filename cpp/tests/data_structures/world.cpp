@@ -11,6 +11,8 @@
 #include "../../src/data_structures/world/world.cpp"
 #include "../../src/lights/lighting.cpp"
 #include "../../src/lights/point_light/point_light.cpp"
+#include "../../src/patterns/pattern.cpp"
+#include "../../src/patterns/solid/solid.cpp"
 #include "../../src/shapes/shape.cpp"
 #include "../../src/shapes/sphere/sphere.cpp"
 #include "./default_world.cpp"
@@ -136,7 +138,7 @@ TEST_CASE("the color with an intersection behind the ray")
 	inner->setMaterial(innerMaterial);
 	auto r = ray(four_tuple::point(0, 0, 0.75), four_tuple::vector(0, 0, -1));
 	auto c = w.getColorAt(r);
-	auto expected = innerMaterial.getColor();
+	auto expected = innerMaterial.getPattern().getColorAtPoint(four_tuple::point(0, 0, 0));
 	REQUIRE(expected == c);
 }
 

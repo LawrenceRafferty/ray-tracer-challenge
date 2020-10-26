@@ -22,4 +22,14 @@ namespace patterns
 		auto patternIndex = static_cast<int>(floor(point.getX())) % _patterns.size();
 		return _patterns.at(patternIndex)->getColorAtPoint(point);
 	}
+
+	bool stripe::equals(const pattern & other) const
+	{
+		const stripe & otherStripe = static_cast<const stripe &>(other);
+		return _patterns.size() == otherStripe._patterns.size() &&
+			 std::equal(
+				 _patterns.begin(),
+				_patterns.end(),
+				otherStripe._patterns.begin());
+	}
 } // namespace patterns
