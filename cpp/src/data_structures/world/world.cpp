@@ -32,7 +32,7 @@ color world::shadeHitWithSingleLight(const point_light & light, const intersecti
 {
 	auto isShadowed = this->getIsShadowed(light, computations.getOverPoint());
 	return lighting(
-		computations.getObject()->getMaterial(),
+		*computations.getObject(),
 		light,
 		computations.getOverPoint(),
 		computations.getEyeVector(),

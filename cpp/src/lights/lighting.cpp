@@ -5,19 +5,20 @@
 
 using data_structures::color;
 using data_structures::four_tuple;
-using data_structures::material;
+using shapes::shape;
 
 namespace lights
 {
 color lighting(
-	const material & material,
+	const shape & shape,
 	const point_light & light,
 	const four_tuple & point,
 	const four_tuple & eyev,
 	const four_tuple & normalv,
 	bool isShadowed)
 {
-	auto effectiveColor = material.getPattern().getColorAtPoint(point) * light.getIntensity();
+	auto effectiveColor = shape.getColorAtPoint(point) * light.getIntensity();
+	auto material = shape.getMaterial();
 	color ambient = effectiveColor * material.getAmbient();
 	if (isShadowed)
 		return ambient;
