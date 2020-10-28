@@ -132,3 +132,46 @@ TEST_CASE("a stripe pattern with many different stripes")
 	REQUIRE(green == stripePattern.getColorAtPoint(four_tuple::point(3, 0, 0)));
 	REQUIRE(blue == stripePattern.getColorAtPoint(four_tuple::point(4, 0, 0)));
 }
+
+TEST_CASE("stripes with an object transformation")
+{
+	auto object = sphere();
+	object.setTransform(matrix::scaling(2, 2, 2));
+	auto stripePattern = patterns::stripe
+	{
+		whitePattern,
+		blackPattern
+	};
+	auto localPoint = object.getLocalPoint(four_tuple::point(1.5, 0, 0));
+	auto c = stripePattern.getColorOnObjectAtPoint(localPoint);
+	REQUIRE(white == c);
+}
+
+TEST_CASE("stripes with a pattern transformation")
+{
+	auto object = sphere();
+	auto stripePattern = patterns::stripe
+	{
+		whitePattern,
+		blackPattern
+	};
+	stripePattern.setTransform(matrix::scaling(2, 2, 2));
+	auto localPoint = object.getLocalPoint(four_tuple::point(1.5, 0, 0));
+	auto c = stripePattern.getColorOnObjectAtPoint(localPoint);
+	REQUIRE(white == c);
+}
+
+TEST_CASE("stripes with both an object and pattern transformation")
+{
+	auto object = sphere();
+	object.setTransform(matrix::scaling(2, 2, 2));
+	auto stripePattern = patterns::stripe
+	{
+		whitePattern,
+		blackPattern
+	};
+	stripePattern.setTransform(matrix::translation(0.5, 0, 0));
+	auto localPoint = object.getLocalPoint(four_tuple::point(2.5, 0, 0));
+	auto c = stripePattern.getColorOnObjectAtPoint(localPoint);
+	REQUIRE(white == c);
+}
