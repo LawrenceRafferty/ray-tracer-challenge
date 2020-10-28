@@ -11,7 +11,7 @@ class test : public pattern
 public:
 	test();
 
-	data_structures::color getColorAtPoint(const data_structures::four_tuple & patternSpacePoint) const;
+	data_structures::color getColorOnObjectAtPoint(const data_structures::four_tuple & objectSpacePoint) const;
 
 private:
 	bool equals(const pattern & other) const;

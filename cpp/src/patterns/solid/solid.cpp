@@ -11,7 +11,7 @@ namespace patterns
 		, _color { color }
 		{}
 
-	color solid::getColorAtPoint(const four_tuple & patternSpacePoint) const
+	color solid::getColorOnObjectAtPoint(const four_tuple & objectSpacePoint) const
 	{
 		return _color;
 	}

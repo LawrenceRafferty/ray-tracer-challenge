@@ -11,7 +11,7 @@ class solid : public pattern
 public:
 	solid(data_structures::color color);
 
-	data_structures::color getColorAtPoint(const data_structures::four_tuple & patternSpacePoint) const;
+	data_structures::color getColorOnObjectAtPoint(const data_structures::four_tuple & objectSpacePoint) const;
 
 private:
 	bool equals(const pattern & other) const;

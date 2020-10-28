@@ -9,8 +9,9 @@ namespace patterns
 {
 	test::test() : pattern() {}
 
-	color test::getColorAtPoint(const four_tuple & patternSpacePoint) const
+	color test::getColorOnObjectAtPoint(const four_tuple & objectSpacePoint) const
 	{
+		auto patternSpacePoint = getPatternSpacePoint(objectSpacePoint);
 		return color(
 			patternSpacePoint.getX(),
 			patternSpacePoint.getY(),

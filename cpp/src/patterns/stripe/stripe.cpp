@@ -17,10 +17,11 @@ namespace patterns
 		: _patterns { std::vector(patterns) }
 	{}
 
-	color stripe::getColorAtPoint(const four_tuple & point) const
+	color stripe::getColorOnObjectAtPoint(const four_tuple & objectSpacePoint) const
 	{
-		auto patternIndex = static_cast<int>(floor(point.getX())) % _patterns.size();
-		return _patterns.at(patternIndex)->getColorAtPoint(point);
+		auto patternSpacePoint = getPatternSpacePoint(objectSpacePoint);
+		auto patternIndex = static_cast<int>(floor(patternSpacePoint.getX())) % _patterns.size();
+		return _patterns.at(patternIndex)->getColorOnObjectAtPoint(objectSpacePoint);
 	}
 
 	bool stripe::equals(const pattern & other) const

@@ -12,7 +12,7 @@ public:
 	stripe(std::vector<std::shared_ptr<pattern>> patterns);
 	stripe(std::initializer_list<std::shared_ptr<pattern>> patterns);
 
-	data_structures::color getColorAtPoint(const data_structures::four_tuple &point) const;
+	data_structures::color getColorOnObjectAtPoint(const data_structures::four_tuple & objectSpacePoint) const;
 
 private:
 	bool equals(const pattern & other) const;

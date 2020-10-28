@@ -27,10 +27,9 @@ pattern::pattern()
 		_inverseTransform = _transform.getInverse();
 	}
 
-	color pattern::getColorOnObjectAtPoint(const four_tuple & objectSpacePoint) const
+	four_tuple pattern::getPatternSpacePoint(const four_tuple & objectSpacePoint) const
 	{
-		auto patternSpacePoint = _inverseTransform * objectSpacePoint;
-		return getColorAtPoint(patternSpacePoint);
+		return _inverseTransform * objectSpacePoint;
 	}
 
 	bool pattern::operator==(const pattern & other) const
